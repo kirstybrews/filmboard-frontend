@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from "react-router-dom";
+import LoginForm from './components/LoginForm'
+import UserProfile from './components/UserProfile'
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route exact path="/login" render={() => (
+        currentUser === null
+        ? <LoginForm setCurrentUser={setCurrentUser}/>
+        : <Redirect to="/user_profile"/>
+      )}/> 
+      <Route exact path="/user_profile" render={() => (
+        currentUser
+        ? <UserProfile currentUser={currentUser}/>
+        : <Redirect to="/login"/>
+      )}/>
+    </Router> 
   );
 }
 
