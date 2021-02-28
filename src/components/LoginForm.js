@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Center, Box, Input, VStack, Button } from "@chakra-ui/react";
 
 const LoginForm = ({ setCurrentUser }) => {
     const [username, setUsername] = useState("");
@@ -18,25 +19,35 @@ const LoginForm = ({ setCurrentUser }) => {
             })
         })
             .then(r => r.json())
-            .then(userData => {
-                if (userData.error_message) {
-                    alert(userData.error_message)
+            .then(data => {
+                if (data.error_message) {
+                    alert(data.error_message)
                 } else {
-                    setCurrentUser(userData)
+                    localStorage.setItem("token", data.token)
+                    setCurrentUser(data.user_data)
                 }
             })
     }
 
     return (
-        <form onSubmit={e => handleSubmit(e)}>
-            <label for="username">username</label>
-            <input id="username" type="text" value={username} onChange={e => setUsername(e.target.value)}/>
-            <br/>
-            <label for="password">password</label>
-            <input id="password" type="text" value={password} onChange={e => setPassword(e.target.value)}/>
-            <br/>
-            <input type="submit"/>
-        </form>
+        <Center h="630px" bg="cyan.100">
+            <Box w="50%" borderWidth="3px" borderColor="gray.200" bg="white" p="10">
+                <form onSubmit={e => handleSubmit(e)}>
+                    <VStack spacing="24px">
+                        <Input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder="Username" />
+                        <Input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
+                        <Button
+                            mt={4}
+                            backgroundColor="grey.200"
+                            align="left"
+                            type="submit"
+                        >
+                            Log In
+                        </Button>
+                    </VStack>
+                </form>
+            </Box>
+        </Center>
     )
 }
 
