@@ -16,9 +16,9 @@ const UserProfile = ({ currentUser, jobPostings, setCurrentUser, userProfile, se
         <>
           <NavBar userProfile={userProfile} setCurrentUser={setCurrentUser} currentUser={currentUser}/>
           <Flex m="6">
-            <SideContainer/>
+            <SideContainer setCurrentUser={setCurrentUser} userProfile={userProfile} {...currentUser} />
             <Spacer />
-            <MainContainer jobPostings={jobPostings.filter(jobPosting => jobPosting.user_id === currentUser.id)}/>
+            <MainContainer currentUser={currentUser} userProfile={userProfile} jobPostings={jobPostings.filter(jobPosting => jobPosting.user_id === currentUser.id)}/>
           </Flex>
         </>
     )

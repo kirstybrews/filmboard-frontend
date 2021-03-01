@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Center, Box, Input, VStack, Button } from "@chakra-ui/react";
-const USERS_URL = 'http://localhost:3000/users'
+import { useHistory } from 'react-router-dom';
+const USERS_URL = 'http://localhost:3000/users';
 
-const SignUp = ({ setCurrentUser }) => {
-    const [name, setName] = useState("")
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [passwordConfirmation, setPasswordConfirmation] = useState("")
+const SignUp = () => {
+    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -33,7 +35,8 @@ const SignUp = ({ setCurrentUser }) => {
                 if (userData.error_message) {
                     alert(userData.error_message)
                 } else {
-                    setCurrentUser(userData)
+                    e.target.reset()
+                    history.push('/login')
                 }
             })
     }

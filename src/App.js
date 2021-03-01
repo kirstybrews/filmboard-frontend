@@ -62,7 +62,7 @@ function App() {
 
       <Route exact path="/signup" render={() => (
         currentUser === null
-        ? <SignUpForm setCurrentUser={setCurrentUser}/>
+        ? <SignUpForm />
         : <Redirect to="/user_profile"/>
       )}/> 
       

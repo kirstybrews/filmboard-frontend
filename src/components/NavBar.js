@@ -20,13 +20,13 @@ const NavBar = ({ currentUser, setCurrentUser, userProfile }) => {
                 <Button 
                     size="lg" 
                     onClick={() => userProfile ? handleClick('/') : handleClick('/user_profile')} 
-                    color="cyan.100" 
+                    color="orange.200" 
                     variant="ghost">
                         {userProfile ? "Discover Jobs" : "My Profile"}
                 </Button>
             </Box>
             <Spacer/>
-              </>  
+            </>  
             : null}
             <Box > 
                 <Heading mt="2.5" pl="2" pb="2" size="md">ReelWork</Heading> 
