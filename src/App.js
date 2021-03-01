@@ -17,6 +17,7 @@ const JOB_POSTINGS_URL = 'http://localhost:3000/job_postings/';
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [jobPostings, setJobPostings] = useState([]);
+  const [userProfile, setUserProfile] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -33,9 +34,6 @@ function App() {
           setCurrentUser(data[0])
           setJobPostings(data[1])
         })
-        // .then(userData => {
-        //   setCurrentUser(userData)
-        // })
     } else {
       fetch(JOB_POSTINGS_URL)
         .then(r => r.json())
@@ -70,7 +68,7 @@ function App() {
       
       <Route exact path="/user_profile" render={() => (
         currentUser
-        ? <UserProfile setCurrentUser={setCurrentUser} jobPostings={jobPostings} currentUser={currentUser}/>
+        ? <UserProfile userProfile={userProfile} setUserProfile={setUserProfile} setCurrentUser={setCurrentUser} jobPostings={jobPostings} currentUser={currentUser}/>
         : <Redirect to="/login"/>
       )}/>
     </Router> 

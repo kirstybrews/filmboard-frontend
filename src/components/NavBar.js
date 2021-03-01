@@ -2,10 +2,9 @@ import React from 'react';
 import { Flex, Spacer, Box, Heading, Button } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';
 
-const NavBar = ({ currentUser, setCurrentUser }) => {
+const NavBar = ({ currentUser, setCurrentUser, userProfile }) => {
     const history = useHistory();
     const handleClick = (URL) => {
-        console.log('click')
         history.push(URL)
     };
 
@@ -15,6 +14,20 @@ const NavBar = ({ currentUser, setCurrentUser }) => {
     }
     return (
         <Flex m="2" p="10">
+            {currentUser
+            ? <>
+            <Box >
+                <Button 
+                    size="lg" 
+                    onClick={() => userProfile ? handleClick('/') : handleClick('/user_profile')} 
+                    color="cyan.100" 
+                    variant="ghost">
+                        {userProfile ? "Discover Jobs" : "My Profile"}
+                </Button>
+            </Box>
+            <Spacer/>
+              </>  
+            : null}
             <Box > 
                 <Heading mt="2.5" pl="2" pb="2" size="md">ReelWork</Heading> 
             </Box>
