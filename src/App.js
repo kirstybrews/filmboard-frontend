@@ -49,7 +49,7 @@ function App() {
           <Flex m="6">
             <SideContainer/>
             <Spacer />
-            <MainContainer jobPostings={jobPostings}/>
+            <MainContainer userProfile={userProfile} currentUser={currentUser} jobPostings={jobPostings}/>
           </Flex>
         </>
       }/>
@@ -68,7 +68,14 @@ function App() {
       
       <Route exact path="/user_profile" render={() => (
         currentUser
-        ? <UserProfile userProfile={userProfile} setUserProfile={setUserProfile} setCurrentUser={setCurrentUser} jobPostings={jobPostings} currentUser={currentUser}/>
+        ? <UserProfile 
+            setJobPostings={setJobPostings} 
+            userProfile={userProfile} 
+            setUserProfile={setUserProfile} 
+            setCurrentUser={setCurrentUser} 
+            jobPostings={jobPostings} 
+            currentUser={currentUser}
+          />
         : <Redirect to="/login"/>
       )}/>
     </Router> 

@@ -3,7 +3,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import JobPostingContainer from './JobPostingContainer';
 import ApplicationContainer from './ApplicationContainer'
 
-const MainContainer = ({ jobPostings, userProfile, currentUser }) => {
+const MainContainer = ({ jobPostings, userProfile, currentUser, setJobPostings, setCurrentUser}) => {
     
     return (
         <>
@@ -15,14 +15,21 @@ const MainContainer = ({ jobPostings, userProfile, currentUser }) => {
                 </TabList>
                 <TabPanels>
                     <TabPanel>
-                        <JobPostingContainer w={null} userProfile={userProfile} jobPostings={jobPostings} />
+                        <JobPostingContainer 
+                            setJobPostings={setJobPostings} 
+                            w={null} 
+                            userProfile={userProfile} 
+                            jobPostings={jobPostings}
+                            currentUser={currentUser}
+                            setCurrentUser={setCurrentUser}
+                        />
                     </TabPanel>
                     <TabPanel>
                         <ApplicationContainer currentUser={currentUser} />
                     </TabPanel>
                 </TabPanels>
             </Tabs>
-        : <JobPostingContainer jobPostings={jobPostings} w="80%" ml="4"/>}
+        : <JobPostingContainer userProfile={userProfile} currentUser={currentUser} jobPostings={jobPostings} w="80%" ml="4" />}
         </>
     )
 }

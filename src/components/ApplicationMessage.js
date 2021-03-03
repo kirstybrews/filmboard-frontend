@@ -52,7 +52,7 @@ const ApplicationMessage = ({ message, id }) => {
                 <HStack>
                     <>
                         <EditablePreview />
-                        <EditableInput />
+                        <EditableInput bg="white"/>
                     </>
                     <EditableControls {...props} />
                 </HStack>

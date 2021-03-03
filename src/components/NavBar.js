@@ -20,7 +20,7 @@ const NavBar = ({ currentUser, setCurrentUser, userProfile }) => {
                 <Button 
                     size="lg" 
                     onClick={() => userProfile ? handleClick('/') : handleClick('/user_profile')} 
-                    color="orange.200" 
+                    color="purple.300" 
                     variant="ghost">
                         {userProfile ? "Discover Jobs" : "My Profile"}
                 </Button>
@@ -34,15 +34,15 @@ const NavBar = ({ currentUser, setCurrentUser, userProfile }) => {
             <Spacer />
             {currentUser
             ? <Box pt="1">
-                <Button onClick={logOut} backgroundColor="cyan.100" mr="4">
+                <Button onClick={logOut} backgroundColor="black" color="white" mr="4">
                     Log Out
                 </Button>
             </Box>
             : <Box pt="1">
-                <Button onClick={() => handleClick('/login')} backgroundColor="cyan.100" mr="4">
+                <Button onClick={() => handleClick('/login')} backgroundColor="black" color="white" mr="4">
                     Log In
                 </Button>
-                <Button onClick={() => handleClick('/signup')} backgroundColor="cyan.100">
+                <Button onClick={() => handleClick('/signup')} backgroundColor="black" color="white">
                     Sign Up
                 </Button>
             </Box>}

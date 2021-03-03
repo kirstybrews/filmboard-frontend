@@ -4,7 +4,7 @@ import SideContainer from './SideContainer';
 import MainContainer from './MainContainer';
 import { Flex, Spacer } from "@chakra-ui/react";
 
-const UserProfile = ({ currentUser, jobPostings, setCurrentUser, userProfile, setUserProfile }) => {
+const UserProfile = ({ currentUser, jobPostings, setCurrentUser, userProfile, setUserProfile, setJobPostings, userJobPostings }) => {
 
     useEffect(() => {
       setUserProfile(true);
@@ -18,7 +18,13 @@ const UserProfile = ({ currentUser, jobPostings, setCurrentUser, userProfile, se
           <Flex m="6">
             <SideContainer setCurrentUser={setCurrentUser} userProfile={userProfile} {...currentUser} />
             <Spacer />
-            <MainContainer currentUser={currentUser} userProfile={userProfile} jobPostings={jobPostings.filter(jobPosting => jobPosting.user_id === currentUser.id)}/>
+            <MainContainer 
+              setJobPostings={setJobPostings} 
+              currentUser={currentUser} 
+              userProfile={userProfile} 
+              jobPostings={jobPostings}
+              setCurrentUser={setCurrentUser}
+            />
           </Flex>
         </>
     )

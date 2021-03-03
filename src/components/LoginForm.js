@@ -20,27 +20,29 @@ const LoginForm = ({ setCurrentUser }) => {
         })
             .then(r => r.json())
             .then(data => {
+                const userData = JSON.parse(data.user_data)
                 if (data.error_message) {
                     alert(data.error_message)
                 } else {
                     localStorage.setItem("token", data.token)
-                    setCurrentUser(data.user_data)
+                    setCurrentUser(userData)
                 }
             })
     }
 
     return (
-        <Center h="630px" bg="cyan.100">
-            <Box w="50%" borderWidth="3px" borderColor="gray.200" bg="white" p="10">
+        <Center h="630px" bgGradient="linear(green.200, purple.200)">
+            <Box w="50%" borderWidth="3px" borderColor="black" bg="white" p="10">
                 <form onSubmit={e => handleSubmit(e)}>
                     <VStack spacing="24px">
                         <Input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder="Username" />
                         <Input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
                         <Button
                             mt={4}
-                            backgroundColor="grey.200"
+                            backgroundColor="black"
                             align="left"
                             type="submit"
+                            color="white"
                         >
                             Log In
                         </Button>

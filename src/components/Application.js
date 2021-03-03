@@ -7,7 +7,7 @@ const Application = ({ job_posting, message, id }) => {
     const {role, location, start_date, length_of_time, project_description} = job_posting
     const [toggleShowDetails, setToggleShowDetails] = useState(false)
     return (
-        <Box bg="orange.200">
+        <Box bg="green.100">
             <Text fontSize="lg">{role}</Text>
             <HStack spacing="24px">
                 <Text>{location}</Text> 

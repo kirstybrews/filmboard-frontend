@@ -29,7 +29,7 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser }) => {
             })
     }
     return (
-        <Box w="20%" borderWidth="3px" borderColor="gray.200" bg="white" p="4">
+        <Box w="20%" borderWidth="3px" borderColor="black" bg="white" p="4">
             <VStack align="left">
                 {userProfile
                     ? <>
@@ -43,7 +43,7 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser }) => {
                             onClose={onClose}
                         >
                             <AlertDialogOverlay>
-                                <AlertDialogContent>
+                                <AlertDialogContent bgGradient="linear(green.200, purple.200)">
                                     <AlertDialogHeader fontSize="lg" fontWeight="bold">
                                         Delete Account
                                     </AlertDialogHeader>
@@ -53,7 +53,7 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser }) => {
                                     </AlertDialogBody>
 
                                     <AlertDialogFooter>
-                                        <Button ref={cancelRef} onClick={onClose}>
+                                        <Button bg="black" color="white" ref={cancelRef} onClick={onClose}>
                                             Cancel
                                         </Button>
                                         <Button colorScheme="red" onClick={handleDelete} ml={3}>

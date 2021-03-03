@@ -41,8 +41,8 @@ const SignUp = () => {
             })
     }
     return (
-        <Center h="630px" bg="cyan.100">
-            <Box w="50%" borderWidth="3px" borderColor="gray.200" bg="white" p="10">
+        <Center h="630px" bgGradient="linear(green.200, purple.200)">
+            <Box w="50%" borderWidth="3px" borderColor="black" bg="white" p="10">
                 <form onSubmit={handleSubmit}>
                     <VStack spacing="24px">
                         <Input value={name} onChange={e => setName(e.target.value)} type="text" placeholder="Name" />
@@ -51,9 +51,10 @@ const SignUp = () => {
                         <Input value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} type="password" placeholder="Confirm Password" />
                         <Button
                             mt={4}
-                            backgroundColor="grey.200"
+                            backgroundColor="black"
                             align="left"
                             type="submit"
+                            color="white"
                         >
                             Create Account
                         </Button>

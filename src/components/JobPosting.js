@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
 import { Box, Text, HStack, Link } from "@chakra-ui/react";
-import { TimeIcon } from '@chakra-ui/icons'
+import { TimeIcon } from '@chakra-ui/icons';
+import ApplicationModal from './ApplicationModal';
+import ApplicationAccordion from './ApplicationAccordion';
 
-const JobPosting = ({ role, location, start_date, length_of_time, project_description }) => {
+const JobPosting = ({ role, location, start_date, length_of_time, project_description, user_id, userProfile, currentUser, id, applications }) => {
     const [toggleShowDetails, setToggleShowDetails] = useState(false)
+
+    const applyButton = () => {
+        if (currentUser) {
+            if (!userProfile && user_id !== currentUser.id) {
+                return <ApplicationModal userId={currentUser.id} jobPostingId={id}/>
+            }
+        }
+    }
+
     return (
-        <Box bg="orange.200">
+        <Box bg="green.100">
             <Text fontSize="lg">{role}</Text>
             <HStack spacing="24px">
                 <Text>{location}</Text> 
@@ -19,7 +30,11 @@ const JobPosting = ({ role, location, start_date, length_of_time, project_descri
                 </Link>
             </HStack>
             {toggleShowDetails
-            ? <Text>Project Description: {project_description}</Text>
+            ? <>
+                <Text>Project Description: {project_description}</Text>
+                {applyButton()}
+                {userProfile ? <ApplicationAccordion applications={applications} /> : null}
+            </>
             : null}
         </Box>
     )
