@@ -13,7 +13,6 @@ const JobPostingContainer = ({ jobPostings, w, userProfile, ml, setJobPostings, 
         <VStack 
             w={w}
             ml={ml}
-            
             divider={<StackDivider borderColor="gray.200" />}
             spacing={4}
             align="stretch"

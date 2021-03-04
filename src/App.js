@@ -11,7 +11,7 @@ import NavBar from './components/NavBar'
 import MainContainer from './components/MainContainer';
 import SideContainer from './components/SideContainer';
 import Footer from './components/Footer'
-import { Flex, Spacer, Box } from "@chakra-ui/react";
+import { Flex, Spacer } from "@chakra-ui/react";
 
 const JOB_POSTINGS_URL = 'http://localhost:3000/job_postings/';
 
@@ -19,6 +19,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [jobPostings, setJobPostings] = useState([]);
   const [userProfile, setUserProfile] = useState(false);
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -42,18 +43,24 @@ function App() {
     }
   }, []);
 
+  const filter = () => {
+    let filterJobPostings = jobPostings;
+
+    filterJobPostings = filterJobPostings.filter(jobPosting => jobPosting.role.toLowerCase().includes(search.toLowerCase()));
+
+    return filterJobPostings
+  }
+
   return (
     <Router>
       <Route exact path="/" render={() => 
-        <Flex minH="100vh" direction="column">
+        <Flex minH="100vh" direction="column" >
           <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
-          <Spacer/>
-          <Flex mr="6" ml="6" mb="150px">
-            <SideContainer/>
+          <Flex mr="6" ml="6" mb="150px" >
+            <SideContainer search={search} setSearch={setSearch}/>
             <Spacer />
-            <MainContainer userProfile={userProfile} currentUser={currentUser} jobPostings={jobPostings}/>
+            <MainContainer userProfile={userProfile} currentUser={currentUser} jobPostings={filter()}/>
           </Flex>
-          <Spacer/>
           <Footer/>
         </Flex>
       }/>
@@ -77,8 +84,10 @@ function App() {
             userProfile={userProfile} 
             setUserProfile={setUserProfile} 
             setCurrentUser={setCurrentUser} 
-            jobPostings={jobPostings} 
+            jobPostings={filter()} 
             currentUser={currentUser}
+            search={search} 
+            setSearch={setSearch}
           />
         : <Redirect to="/login"/>
       )}/>

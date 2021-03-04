@@ -18,7 +18,6 @@ const MainContainer = ({ jobPostings, userProfile, currentUser, setJobPostings, 
                         <JobPostingContainer 
                             setJobPostings={setJobPostings} 
                             w={null} 
-                            
                             userProfile={userProfile} 
                             jobPostings={jobPostings}
                             currentUser={currentUser}

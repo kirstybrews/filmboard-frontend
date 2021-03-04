@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Filter from './Filter';
 import {
     Box,
     Text,
@@ -15,7 +16,7 @@ import {
 const USERS_URL = 'http://localhost:3000/users/'
 
 
-const SideContainer = ({ id, name, userProfile, setCurrentUser }) => {
+const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch }) => {
     const [isOpen, setIsOpen] = useState(false)
     const onClose = () => setIsOpen(false)
     const cancelRef = useRef()
@@ -29,7 +30,7 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser }) => {
             })
     }
     return (
-        <Box w="20%" p="4">
+        <Box w="20%" >
             <VStack align="left">
                 {userProfile
                     ? <>
@@ -64,7 +65,7 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser }) => {
                             </AlertDialogOverlay>
                         </AlertDialog>
                     </>
-                    : null}
+                    : <Filter search={search} setSearch={setSearch}/>}
 
             </VStack>
         </Box>

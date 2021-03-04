@@ -10,8 +10,8 @@ const Footer = () => {
                 </Box>
                 <Spacer/>
                 <Box pt="5">
-                    <HStack ml="135px">
-                        <Text color="white" fontSize="sm">Created By: </Text>
+                    <HStack ml="143px" spacing="1">
+                        <Text color="white" fontSize="sm">Created by</Text>
                         <Link color="white" fontSize="sm" href="https://github.com/kirstybrews">Kirsty Brewster</Link>
                     </HStack>
                     <Text color="white" fontSize="sm">&copy; Copyright 2021 - ReelWork.  All rights reserved.</Text>
