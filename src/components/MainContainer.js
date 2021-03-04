@@ -8,8 +8,8 @@ const MainContainer = ({ jobPostings, userProfile, currentUser, setJobPostings, 
     return (
         <>
             {userProfile
-            ? <Tabs w="80%" variant="enclosed" ml="4">
-                <TabList>
+            ? <Tabs w="80%" variant="enclosed" ml="4"  >
+                <TabList >
                     <Tab>My Job Postings</Tab>
                     <Tab>My Applications</Tab>
                 </TabList>
@@ -18,6 +18,7 @@ const MainContainer = ({ jobPostings, userProfile, currentUser, setJobPostings, 
                         <JobPostingContainer 
                             setJobPostings={setJobPostings} 
                             w={null} 
+                            
                             userProfile={userProfile} 
                             jobPostings={jobPostings}
                             currentUser={currentUser}

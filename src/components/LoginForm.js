@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Center, Box, Input, VStack, Button } from "@chakra-ui/react";
+import Logo from './Logo'
 
 const LoginForm = ({ setCurrentUser }) => {
     const [username, setUsername] = useState("");
@@ -31,8 +32,9 @@ const LoginForm = ({ setCurrentUser }) => {
     }
 
     return (
-        <Center h="630px" bgGradient="linear(green.200, purple.200)">
-            <Box w="50%" borderWidth="3px" borderColor="black" bg="white" p="10">
+        <Center minHeight="100vh" bgGradient="linear(green.200, purple.200)">
+            <Box w="35%" borderWidth="3px" borderColor="black" bg="white" p="10">
+                <Logo/>
                 <form onSubmit={e => handleSubmit(e)}>
                     <VStack spacing="24px">
                         <Input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder="Username" />

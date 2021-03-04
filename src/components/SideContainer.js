@@ -29,7 +29,7 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser }) => {
             })
     }
     return (
-        <Box w="20%" borderWidth="3px" borderColor="black" bg="white" p="4">
+        <Box w="20%" p="4">
             <VStack align="left">
                 {userProfile
                     ? <>

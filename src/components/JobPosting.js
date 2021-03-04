@@ -16,7 +16,7 @@ const JobPosting = ({ role, location, start_date, length_of_time, project_descri
     }
 
     return (
-        <Box bg="green.100">
+        <Box p="2" bg="green.100">
             <Text fontSize="lg">{role}</Text>
             <HStack spacing="24px">
                 <Text>{location}</Text> 

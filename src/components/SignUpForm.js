@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Logo from './Logo'
 import { Center, Box, Input, VStack, Button } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';
 const USERS_URL = 'http://localhost:3000/users';
@@ -41,8 +42,9 @@ const SignUp = () => {
             })
     }
     return (
-        <Center h="630px" bgGradient="linear(green.200, purple.200)">
-            <Box w="50%" borderWidth="3px" borderColor="black" bg="white" p="10">
+        <Center minHeight="100vh" bgGradient="linear(green.200, purple.200)">
+            <Box w="35%" borderWidth="3px" borderColor="black" bg="white" p="10">
+                <Logo/>
                 <form onSubmit={handleSubmit}>
                     <VStack spacing="24px">
                         <Input value={name} onChange={e => setName(e.target.value)} type="text" placeholder="Name" />

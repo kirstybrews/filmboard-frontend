@@ -1,5 +1,6 @@
 import React from 'react';
-import { Flex, Spacer, Box, Heading, Button } from "@chakra-ui/react";
+import Logo from './Logo'
+import { Flex, Spacer, Box, Button } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';
 
 const NavBar = ({ currentUser, setCurrentUser, userProfile }) => {
@@ -13,14 +14,13 @@ const NavBar = ({ currentUser, setCurrentUser, userProfile }) => {
         setCurrentUser(null)
     }
     return (
-        <Flex m="2" p="10">
+        <Flex as="nav" mr="2" ml="2" mt="2" p="4">
             {currentUser
             ? <>
             <Box >
                 <Button 
                     size="lg" 
                     onClick={() => userProfile ? handleClick('/') : handleClick('/user_profile')} 
-                    color="purple.300" 
                     variant="ghost">
                         {userProfile ? "Discover Jobs" : "My Profile"}
                 </Button>
@@ -28,9 +28,7 @@ const NavBar = ({ currentUser, setCurrentUser, userProfile }) => {
             <Spacer/>
             </>  
             : null}
-            <Box > 
-                <Heading mt="2.5" pl="2" pb="2" size="md">ReelWork</Heading> 
-            </Box>
+            <Logo/>
             <Spacer />
             {currentUser
             ? <Box pt="1">

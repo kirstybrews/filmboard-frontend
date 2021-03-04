@@ -10,7 +10,8 @@ import UserProfile from './components/UserProfile';
 import NavBar from './components/NavBar'
 import MainContainer from './components/MainContainer';
 import SideContainer from './components/SideContainer';
-import { Flex, Spacer } from "@chakra-ui/react";
+import Footer from './components/Footer'
+import { Flex, Spacer, Box } from "@chakra-ui/react";
 
 const JOB_POSTINGS_URL = 'http://localhost:3000/job_postings/';
 
@@ -44,14 +45,17 @@ function App() {
   return (
     <Router>
       <Route exact path="/" render={() => 
-        <>
+        <Flex minH="100vh" direction="column">
           <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
-          <Flex m="6">
+          <Spacer/>
+          <Flex mr="6" ml="6" mb="150px">
             <SideContainer/>
             <Spacer />
             <MainContainer userProfile={userProfile} currentUser={currentUser} jobPostings={jobPostings}/>
           </Flex>
-        </>
+          <Spacer/>
+          <Footer/>
+        </Flex>
       }/>
 
       <Route exact path="/login" render={() => (
