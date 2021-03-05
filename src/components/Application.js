@@ -23,10 +23,8 @@ const Application = ({ job_posting, message, id }) => {
             {toggleShowDetails
             ? <>
                 <Text>Project Description: {project_description}</Text>
-                <HStack>
-                    <Text>Your Message: </Text>
-                    <ApplicationMessage id={id} message={message}/>
-                </HStack>
+                <Text>Your Message: </Text>
+                <ApplicationMessage id={id} message={message}/>
             </>
             : null}
         </Box>
