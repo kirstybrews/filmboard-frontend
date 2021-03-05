@@ -5,9 +5,13 @@ import JobFormDrawer from './JobFormDrawer'
 
 const JobPostingContainer = ({ jobPostings, w, userProfile, ml, setJobPostings, currentUser, setCurrentUser, applications }) => {
     let postings
-    userProfile
-    ? postings = currentUser.job_postings
-    : postings = jobPostings
+    if (userProfile) {
+        postings = currentUser.job_postings
+    } else if (currentUser && !userProfile) {
+        postings = jobPostings.filter(jobPosting => jobPosting.user_id !== currentUser.id)
+    } else {
+        postings = jobPostings
+    }
     return (
         <VStack 
             w={w}

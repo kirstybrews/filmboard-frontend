@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from './Logo'
-import { Center, Box, Input, VStack, Button } from "@chakra-ui/react";
+import { Center, Box, Input, VStack, Button, Text } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';
 const USERS_URL = 'http://localhost:3000/users';
 
@@ -10,6 +10,7 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const history = useHistory();
+    const [errors, setErrors] = useState({})
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -33,8 +34,9 @@ const SignUp = () => {
         fetch(USERS_URL, reqPack)
             .then(r => r.json())
             .then(userData => {
-                if (userData.error_message) {
-                    alert(userData.error_message)
+                if (userData.errors) {
+                    setErrors(userData.errors)
+                    console.log(userData.errors)
                 } else {
                     e.target.reset()
                     history.push('/login')
@@ -47,10 +49,22 @@ const SignUp = () => {
                 <Logo/>
                 <form onSubmit={handleSubmit}>
                     <VStack spacing="24px">
-                        <Input value={name} onChange={e => setName(e.target.value)} type="text" placeholder="Name" />
-                        <Input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder="Username" />
-                        <Input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
-                        <Input value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} type="password" placeholder="Confirm Password" />
+                        <VStack w="100%">
+                            <Input value={name} onChange={e => setName(e.target.value)} type="text" placeholder="Name" />
+                            {errors.name ? <Text fontSize="sm" color="red">Name {errors.name[0]}</Text> : null}
+                        </VStack>
+                        <VStack w="100%">
+                            <Input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder="Username" />
+                            {errors.username ? <Text fontSize="sm" color="red">Username {errors.username[0]}</Text> : null}
+                        </VStack>
+                        <VStack w ="100%">
+                            <Input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
+                            {errors.password ? errors.password.map(password => <Text fontSize="sm" color="red">Password {password}</Text>) : null}
+                        </VStack>
+                        <VStack w="100%">
+                            <Input value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} type="password" placeholder="Confirm Password" />
+                            {errors.password_confirmation ? <Text fontSize="sm" color="red">Password confirmation doesn't match password</Text> : null}
+                        </VStack>
                         <Button
                             mt={4}
                             backgroundColor="black"
