@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Filter from './Filter';
+import UpdateUserModal from './UpdateUserModal';
 import {
     Box,
     Text,
@@ -11,12 +12,13 @@ import {
     AlertDialogHeader,
     AlertDialogContent,
     AlertDialogOverlay,
-    Button
+    Button,
+    Avatar
 } from "@chakra-ui/react";
 const USERS_URL = 'http://localhost:3000/users/'
 
 
-const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch }) => {
+const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch, avatar, bio, username }) => {
     const [isOpen, setIsOpen] = useState(false)
     const onClose = () => setIsOpen(false)
     const cancelRef = useRef()
@@ -34,7 +36,11 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearc
             <VStack align="left">
                 {userProfile
                     ? <>
+                        <Avatar src={avatar}/>
                         <Text fontSize="lg">{name}</Text>
+                        <Text fontSize="md">{bio ? bio : "404 Bio Not Found"}</Text>
+                        
+                        <UpdateUserModal id={id} name={name} username={username} avatar={avatar} bio={bio} setCurrentUser={setCurrentUser}/>
                         <Link color="red" onClick={() => setIsOpen(true)}>
                             Delete Account
                         </Link>
@@ -71,5 +77,6 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearc
         </Box>
     )
 }
+
 
 export default SideContainer;
