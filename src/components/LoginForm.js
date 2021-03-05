@@ -8,7 +8,6 @@ const LoginForm = ({ setCurrentUser }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('attempted login')
         fetch("http://localhost:3000/login", { 
             method: "POST",
             headers: {

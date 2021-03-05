@@ -13,7 +13,7 @@ import {
   } from "@chakra-ui/react";
 const APPLICATIONS_URL = 'http://localhost:3000/applications/'
 
-const ApplicationModal = ({ userId, jobPostingId}) => {
+const ApplicationModal = ({ userId, jobPostingId, app}) => {
     const [message, setMessage] = useState("")
 
     const handleSubmit = (e) => {
@@ -41,8 +41,10 @@ const ApplicationModal = ({ userId, jobPostingId}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
-            <Button onClick={onOpen} backgroundColor="black" color="white">Apply Now!</Button>
-
+            {app()
+            ? <Button onClick={onOpen} backgroundColor="black" color="white">Apply Now!</Button>
+            : <Button isDisabled backgroundColor="black" color="white">Already Applied</Button>}
+            
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <form onSubmit={handleSubmit}>

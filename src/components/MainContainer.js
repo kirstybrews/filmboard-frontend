@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import JobPostingContainer from './JobPostingContainer';
-import ApplicationContainer from './ApplicationContainer'
+import ApplicationContainer from './ApplicationContainer';
+const APPLICATIONS_URL = 'http://localhost:3000/applications';
 
 const MainContainer = ({ jobPostings, userProfile, currentUser, setJobPostings, setCurrentUser}) => {
-    
+    const [applications, setApplications] = useState([])
+
+    useEffect(() => {
+        fetch(APPLICATIONS_URL)
+            .then(r => r.json())
+            .then(applications => {
+                setApplications(applications)
+            })
+        return () => {
+            setApplications([])
+        };
+    }, [])
     return (
         <>
             {userProfile
@@ -25,11 +37,11 @@ const MainContainer = ({ jobPostings, userProfile, currentUser, setJobPostings, 
                         />
                     </TabPanel>
                     <TabPanel>
-                        <ApplicationContainer currentUser={currentUser} />
+                        <ApplicationContainer currentUser={currentUser} applications={applications}/>
                     </TabPanel>
                 </TabPanels>
             </Tabs>
-        : <JobPostingContainer userProfile={userProfile} currentUser={currentUser} jobPostings={jobPostings} w="80%" ml="4" />}
+        : <JobPostingContainer userProfile={userProfile} currentUser={currentUser} jobPostings={jobPostings} w="80%" ml="4" applications={applications}/>}
         </>
     )
 }

@@ -84,10 +84,8 @@ function App() {
             userProfile={userProfile} 
             setUserProfile={setUserProfile} 
             setCurrentUser={setCurrentUser} 
-            jobPostings={filter()} 
+            jobPostings={jobPostings} 
             currentUser={currentUser}
-            search={search} 
-            setSearch={setSearch}
           />
         : <Redirect to="/login"/>
       )}/>

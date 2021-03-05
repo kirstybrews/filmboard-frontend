@@ -4,13 +4,19 @@ import { TimeIcon } from '@chakra-ui/icons';
 import ApplicationModal from './ApplicationModal';
 import ApplicationAccordion from './ApplicationAccordion';
 
-const JobPosting = ({ role, location, start_date, length_of_time, project_description, user_id, userProfile, currentUser, id, applications }) => {
+const JobPosting = ({ role, location, start_date, length_of_time, project_description, user_id, userProfile, currentUser, id, apps, applications }) => {
     const [toggleShowDetails, setToggleShowDetails] = useState(false)
+
+    const checkApps = () => {
+        let app = null
+        apps.map(application => application.job_posting_id === id && application.user_id === currentUser.id ? app = application : null)
+        return !app
+    }
 
     const applyButton = () => {
         if (currentUser) {
             if (!userProfile && user_id !== currentUser.id) {
-                return <ApplicationModal userId={currentUser.id} jobPostingId={id}/>
+                return <ApplicationModal app={checkApps} userId={currentUser.id} jobPostingId={id}/>
             }
         }
     }
@@ -26,7 +32,7 @@ const JobPosting = ({ role, location, start_date, length_of_time, project_descri
                     <Text> For {length_of_time}</Text> 
                 </HStack>
                 <Link color="teal.500" onClick={() => setToggleShowDetails(!toggleShowDetails)}>
-                    Show Details
+                    {toggleShowDetails ? "Hide Details" : "Show Details"}
                 </Link>
             </HStack>
             {toggleShowDetails
