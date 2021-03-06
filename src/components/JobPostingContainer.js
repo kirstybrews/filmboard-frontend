@@ -3,7 +3,7 @@ import { VStack, StackDivider } from "@chakra-ui/react";
 import JobPosting from './JobPosting';
 import JobFormDrawer from './JobFormDrawer'
 
-const JobPostingContainer = ({ jobPostings, w, userProfile, ml, setJobPostings, currentUser, setCurrentUser, applications }) => {
+const JobPostingContainer = ({ jobPostings, w, userProfile, ml, setJobPostings, currentUser, setCurrentUser, applications, setApplications }) => {
     let postings
     if (userProfile) {
         postings = currentUser.job_postings
@@ -28,7 +28,7 @@ const JobPostingContainer = ({ jobPostings, w, userProfile, ml, setJobPostings, 
                 setCurrentUser={setCurrentUser}
             />
             : null}
-            {postings.map(posting => <JobPosting currentUser={currentUser} userProfile={userProfile} key={posting.id} {...posting} apps={applications}/>)}
+            {postings.map(posting => <JobPosting currentUser={currentUser} userProfile={userProfile} key={posting.id} {...posting} apps={applications} setApps={setApplications}/>)}
             
         </VStack>
     )

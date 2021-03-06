@@ -41,7 +41,7 @@ const MainContainer = ({ jobPostings, userProfile, currentUser, setJobPostings, 
                     </TabPanel>
                 </TabPanels>
             </Tabs>
-        : <JobPostingContainer userProfile={userProfile} currentUser={currentUser} jobPostings={jobPostings} w="80%" ml="4" applications={applications}/>}
+        : <JobPostingContainer userProfile={userProfile} currentUser={currentUser} jobPostings={jobPostings} w="80%" ml="4" applications={applications} setApplications={setApplications}/>}
         </>
     )
 }

@@ -13,14 +13,14 @@ import {
   } from "@chakra-ui/react";
 const APPLICATIONS_URL = 'http://localhost:3000/applications/'
 
-const ApplicationModal = ({ userId, jobPostingId, app}) => {
+const ApplicationModal = ({ jobPostingId, app, currentUser, apps, setApps}) => {
     const [message, setMessage] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const newApp = {
             message: message,
-            user_id: userId,
+            user_id: currentUser.id,
             job_posting_id: jobPostingId
         }
 
@@ -34,6 +34,9 @@ const ApplicationModal = ({ userId, jobPostingId, app}) => {
         fetch(APPLICATIONS_URL, reqPack)
             .then(r => r.json())
             .then(appData => {
+                const allApps = apps
+                allApps.push(appData)
+                setApps(allApps)
                 onClose()
             })
     }

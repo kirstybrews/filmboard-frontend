@@ -4,7 +4,7 @@ import { TimeIcon } from '@chakra-ui/icons';
 import ApplicationModal from './ApplicationModal';
 import ApplicationAccordion from './ApplicationAccordion';
 
-const JobPosting = ({ role, location, start_date, length_of_time, project_description, user_id, userProfile, currentUser, id, apps, applications }) => {
+const JobPosting = ({ role, location, start_date, length_of_time, project_description, user_id, userProfile, currentUser, id, apps, applications, setApps }) => {
     const [toggleShowDetails, setToggleShowDetails] = useState(false)
 
     const checkApps = () => {
@@ -16,7 +16,7 @@ const JobPosting = ({ role, location, start_date, length_of_time, project_descri
     const applyButton = () => {
         if (currentUser) {
             if (!userProfile && user_id !== currentUser.id) {
-                return <ApplicationModal app={checkApps} userId={currentUser.id} jobPostingId={id}/>
+                return <ApplicationModal app={checkApps} jobPostingId={id} currentUser={currentUser} apps={apps} setApps={setApps}/>
             }
         }
     }
