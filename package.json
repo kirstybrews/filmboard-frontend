@@ -14,6 +14,7 @@
     "framer-motion": "^3.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
@@ -41,5 +42,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@iconify-icons/bi": "^1.1.2",
+    "@iconify-icons/bx": "^1.1.0",
+    "@iconify-icons/bytesize": "^1.1.0",
+    "@iconify-icons/fluent": "^1.1.8",
+    "@iconify/react": "^1.1.4"
   }
 }

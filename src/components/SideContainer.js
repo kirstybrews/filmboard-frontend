@@ -18,7 +18,7 @@ import {
 const USERS_URL = 'http://localhost:3000/users/'
 
 
-const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch, avatar, bio, username }) => {
+const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch, avatar, bio, username, searchLocation, setSearchLocation, sort, setSort }) => {
     const [isOpen, setIsOpen] = useState(false)
     const onClose = () => setIsOpen(false)
     const cancelRef = useRef()
@@ -71,7 +71,14 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearc
                             </AlertDialogOverlay>
                         </AlertDialog>
                     </>
-                    : <Filter search={search} setSearch={setSearch}/>}
+                    : <Filter 
+                        search={search} 
+                        setSearch={setSearch}
+                        searchlocation={searchLocation}
+                        setSearchLocation={setSearchLocation}
+                        sort={sort}
+                        setSort={setSort}
+                    />}
 
             </VStack>
         </Box>

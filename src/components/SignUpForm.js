@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from './Logo'
-import { Center, Box, Input, VStack, Button, Text } from "@chakra-ui/react";
+import { Center, Box, Input, VStack, Button, Text, Tooltip } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';
 const USERS_URL = 'http://localhost:3000/users';
 
@@ -58,7 +58,9 @@ const SignUp = () => {
                             {errors.username ? <Text fontSize="sm" color="red">Username {errors.username[0]}</Text> : null}
                         </VStack>
                         <VStack w ="100%">
-                            <Input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
+                            <Tooltip hasArrow label="Must contain at least 6 characters, a digit, a lower case character, an upper case character, and a symbol." bg="gray.300" color="black">
+                                <Input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
+                                </Tooltip>
                             {errors.password ? errors.password.map(password => <Text fontSize="sm" color="red">Password {password}</Text>) : null}
                         </VStack>
                         <VStack w="100%">

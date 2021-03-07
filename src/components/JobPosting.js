@@ -3,6 +3,10 @@ import { Box, Text, HStack, Link } from "@chakra-ui/react";
 import { TimeIcon } from '@chakra-ui/icons';
 import ApplicationModal from './ApplicationModal';
 import ApplicationAccordion from './ApplicationAccordion';
+import { Icon } from '@iconify/react';
+import calendarEvent from '@iconify-icons/bi/calendar-event';
+import locationIcon from '@iconify-icons/bytesize/location';
+
 
 const JobPosting = ({ role, location, start_date, length_of_time, project_description, user_id, userProfile, currentUser, id, apps, applications, setApps }) => {
     const [toggleShowDetails, setToggleShowDetails] = useState(false)
@@ -25,8 +29,14 @@ const JobPosting = ({ role, location, start_date, length_of_time, project_descri
         <Box p="2" bg="green.100">
             <Text fontSize="lg">{role}</Text>
             <HStack spacing="24px">
-                <Text>{location}</Text> 
-                <Text> Starts {start_date}</Text>
+                <HStack>
+                    <Icon icon={locationIcon} mt="4"/>
+                    <Text>{location}</Text> 
+                </HStack>
+                <HStack>
+                    <Icon icon={calendarEvent} />
+                    <Text> Starts {start_date}</Text>
+                </HStack>
                 <HStack>
                     <TimeIcon/>
                     <Text> For {length_of_time}</Text> 

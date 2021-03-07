@@ -19,7 +19,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [jobPostings, setJobPostings] = useState([]);
   const [userProfile, setUserProfile] = useState(false);
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
+  const [sort, setSort] = useState("")
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -46,7 +48,28 @@ function App() {
   const filter = () => {
     let filterJobPostings = jobPostings;
 
-    filterJobPostings = filterJobPostings.filter(jobPosting => jobPosting.role.toLowerCase().includes(search.toLowerCase()));
+    if (search !== "") {
+      filterJobPostings = filterJobPostings.filter(jobPosting => jobPosting.role.toLowerCase().includes(search.toLowerCase()));
+    }
+    if (searchLocation !== "") {
+      filterJobPostings = filterJobPostings.filter(jobPosting => jobPosting.location.toLowerCase().includes(searchLocation.toLowerCase()));
+    }
+
+    if (sort !== "") {
+      if (sort === "Start Date") {
+        filterJobPostings = filterJobPostings.sort((a, b) => (+(a.start_date.split(/[-/]+/)[2]) > +(b.start_date.split(/[-/]+/)[2])) ? 1 : (+(a.start_date.split(/[-/]+/)[2]) === +(b.start_date.split(/[-/]+/)[2])) ? ((+(a.start_date.split(/[-/]+/)[0]) > +(b.start_date.split(/[-/]+/)[0])) ? 1 : -1) : (+(a.start_date.split(/[-/]+/)[0]) === +(b.start_date.split(/[-/]+/)[0])) ? ((+(a.start_date.split(/[-/]+/)[1]) > +(b.start_date.split(/[-/]+/)[1])) ? 1 : -1) : -1)
+      } else {
+        const times = ["day", "days", "week", 'weeks', "month", "months", "year", "years"]
+        const sorter = (a, b) => {
+          if(a.length_of_time.split(" ")[1] !== b.length_of_time.split(" ")[1]){
+             return times.indexOf(a.length_of_time.split(" ")[1]) - times.indexOf(b.length_of_time.split(" ")[1]);
+          }else if (a.length_of_time.split(" ")[1] === b.length_of_time.split(" ")[1]) {
+             return +a.length_of_time.split(/[\s-]+/)[0] - +b.length_of_time.split(/[\s-]+/)[0]
+          };
+        };
+        filterJobPostings = filterJobPostings.sort(sorter)
+      }
+    };
 
     return filterJobPostings
   }
@@ -55,9 +78,16 @@ function App() {
     <Router>
       <Route exact path="/" render={() => 
         <Flex minH="100vh" direction="column" >
-          <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
+          <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser} setSearch={setSearch} setSearchLocation={setSearchLocation} setSort={setSort}/>
           <Flex mr="6" ml="6" mb="150px" >
-            <SideContainer search={search} setSearch={setSearch}/>
+            <SideContainer 
+              searchLocation={searchLocation} 
+              setSearchLocation={setSearchLocation} 
+              search={search} 
+              setSearch={setSearch}
+              sort={sort}
+              setSort={setSort}
+            />
             <Spacer />
             <MainContainer userProfile={userProfile} currentUser={currentUser} jobPostings={filter()}/>
           </Flex>
