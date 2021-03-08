@@ -5,7 +5,7 @@ import MainContainer from './MainContainer';
 import Footer from './Footer'
 import { Flex, Spacer } from "@chakra-ui/react";
 
-const UserProfile = ({ currentUser, jobPostings, setCurrentUser, userProfile, setUserProfile, setJobPostings }) => {
+const UserProfile = ({ currentUser, jobPostings, setCurrentUser, userProfile, setUserProfile, setJobPostings, setSearch, setSearchLocation, setSort }) => {
 
     useEffect(() => {
       setUserProfile(true);
@@ -16,7 +16,7 @@ const UserProfile = ({ currentUser, jobPostings, setCurrentUser, userProfile, se
     return (
         
           <Flex minH="100vh" direction="column">
-            <NavBar userProfile={userProfile} setCurrentUser={setCurrentUser} currentUser={currentUser}/>
+            <NavBar setSearchLocation={setSearchLocation} setSort={setSort} setSearch={setSearch} userProfile={userProfile} setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <Flex mr="6" ml="6" mb="150px">
               <SideContainer 
                 setCurrentUser={setCurrentUser} 

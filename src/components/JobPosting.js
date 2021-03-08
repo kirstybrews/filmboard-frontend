@@ -35,7 +35,7 @@ const JobPosting = ({ role, location, start_date, length_of_time, project_descri
                 </HStack>
                 <HStack>
                     <Icon icon={calendarEvent} />
-                    <Text> Starts {start_date}</Text>
+                    <Text> Starts {start_date.split(",")[0]}</Text>
                 </HStack>
                 <HStack>
                     <TimeIcon/>

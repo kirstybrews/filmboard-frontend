@@ -57,14 +57,15 @@ function App() {
 
     if (sort !== "") {
       if (sort === "Start Date") {
-        filterJobPostings = filterJobPostings.sort((a, b) => (+(a.start_date.split(/[-/]+/)[2]) > +(b.start_date.split(/[-/]+/)[2])) ? 1 : (+(a.start_date.split(/[-/]+/)[2]) === +(b.start_date.split(/[-/]+/)[2])) ? ((+(a.start_date.split(/[-/]+/)[0]) > +(b.start_date.split(/[-/]+/)[0])) ? 1 : -1) : (+(a.start_date.split(/[-/]+/)[0]) === +(b.start_date.split(/[-/]+/)[0])) ? ((+(a.start_date.split(/[-/]+/)[1]) > +(b.start_date.split(/[-/]+/)[1])) ? 1 : -1) : -1)
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        filterJobPostings = filterJobPostings.sort((a, b) => (+(a.start_date.split(" ")[2]) > +(b.start_date.split(" ")[2])) ? 1 : (+(a.start_date.split(" ")[2]) === +(b.start_date.split(" ")[2])) ? ((months.indexOf(a.start_date.split(" ")[0]) > months.indexOf(b.start_date.split(" ")[0])) ? 1 : -1) : (months.indexOf(a.start_date.split(" ")[0]) === months.indexOf(b.start_date.split(" ")[0])) ? ((+(a.start_date.split(/[\s,]+/)[1]) > +(b.start_date.split(/[\s,]+/)[1])) ? 1 : -1) : -1)
       } else {
-        const times = ["day", "days", "week", 'weeks', "month", "months", "year", "years"]
+        const times = ["day(s)", 'week(s)', "month(s)", "year(s)"]
         const sorter = (a, b) => {
           if(a.length_of_time.split(" ")[1] !== b.length_of_time.split(" ")[1]){
              return times.indexOf(a.length_of_time.split(" ")[1]) - times.indexOf(b.length_of_time.split(" ")[1]);
           }else if (a.length_of_time.split(" ")[1] === b.length_of_time.split(" ")[1]) {
-             return +a.length_of_time.split(/[\s-]+/)[0] - +b.length_of_time.split(/[\s-]+/)[0]
+             return +a.length_of_time.split(" ")[0] - +b.length_of_time.split(" ")[0]
           };
         };
         filterJobPostings = filterJobPostings.sort(sorter)
@@ -116,6 +117,9 @@ function App() {
             setCurrentUser={setCurrentUser} 
             jobPostings={jobPostings} 
             currentUser={currentUser}
+            setSearch={setSearch}
+            setSearchLocation={setSearchLocation}
+            setSort={setSort}
           />
         : <Redirect to="/login"/>
       )}/>
