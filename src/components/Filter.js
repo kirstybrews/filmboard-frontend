@@ -1,8 +1,8 @@
 import React from 'react';
-import { Input, InputGroup, InputLeftAddon, Radio, RadioGroup, Stack, VStack, Text } from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftAddon, Radio, RadioGroup, Stack, VStack, Text, Switch, Flex } from "@chakra-ui/react";
 import { SearchIcon } from '@chakra-ui/icons';
 
-const Filter = ({ search, setSearch, searchLocation, setSearchLocation, sort, setSort }) => {
+const Filter = ({ search, setSearch, searchLocation, setSearchLocation, sort, setSort, gearNeeds, setGearNeeds }) => {
     return (
         <VStack spacing="20px" align="left">
             <InputGroup>
@@ -20,6 +20,10 @@ const Filter = ({ search, setSearch, searchLocation, setSearchLocation, sort, se
                     <Radio value="Length of Time">Length of Time</Radio>
                 </Stack>
             </RadioGroup>
+            <Flex alignItems="center">
+                <Text mb="0" mr="2">No gear needed</Text>
+                <Switch isChecked={gearNeeds} onChange={() => setGearNeeds(!gearNeeds)}/>
+            </Flex>
         </VStack>
     )
 }

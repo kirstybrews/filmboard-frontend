@@ -3,18 +3,20 @@ import Logo from './Logo'
 import { Flex, Spacer, Box, Button } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';
 
-const NavBar = ({ currentUser, setCurrentUser, userProfile, setSearch, setSearchLocation, setSort }) => {
+const NavBar = ({ currentUser, setCurrentUser, userProfile, setSearch, setSearchLocation, setSort, setGearNeeds }) => {
     const history = useHistory();
     const handleClick = (URL) => {
+        setSearch("")
+        setSearchLocation("")
+        setSort("")
+        setGearNeeds(false)
         history.push(URL)
     };
 
     const logOut = () => {
-        localStorage.removeItem("token")
         setCurrentUser(null)
-        setSearch("")
-        setSearchLocation("")
-        setSort("")
+        localStorage.removeItem("token")
+        handleClick('/')
     }
     return (
         <Flex as="nav" mr="2" ml="2" mt="2" pl="2" pr="2">
