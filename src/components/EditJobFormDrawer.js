@@ -76,18 +76,19 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
             method: "PATCH",
             body: JSON.stringify(newJobPosting)
         }
+        
         fetch(JOBS_URL + id, reqPack)
             .then(r => r.json())
             .then(jobPosting => {
                 if (jobPosting.error_message) {
                     alert(jobPosting.error_message)
                 } else {
-                    const updatedJobs = currentUser.job_postings
-                    updatedJobs.map(job => job.id === jobPosting.id ? jobPosting : job)
+                    let updatedJobs = currentUser.job_postings
+                    updatedJobs = updatedJobs.map(job => job.id === jobPosting.id ? jobPosting : job)
                     const updatedUser = currentUser
                     updatedUser.job_postings = updatedJobs
-                    const updatedAllJobs = jobPostings
-                    updatedAllJobs.map(job => job.id === jobPosting.id ? jobPosting : job)
+                    let updatedAllJobs = jobPostings
+                    updatedAllJobs = updatedAllJobs.map(job => job.id === jobPosting.id ? jobPosting : job)
                     setCurrentUser(updatedUser)
                     setJobPostings(updatedAllJobs)
                     onClose()

@@ -48,6 +48,7 @@ const JobPosting = ({  apps, id, currentUser, userProfile, user_id, setApps, rol
             </HStack>
             {toggleShowDetails
             ? <>
+                
                 <Text>Project Title: {project_title}</Text>
                 <Text>Project Type: {project_type}</Text>
                 <Text>Project Description: {project_description}</Text>
