@@ -28,7 +28,7 @@ const JobPostingContainer = ({ jobPostings, w, userProfile, ml, setJobPostings, 
                 setCurrentUser={setCurrentUser}
             />
             : null}
-            {postings.map(posting => <JobPosting currentUser={currentUser} userProfile={userProfile} key={posting.id} {...posting} apps={applications} setApps={setApplications}/>)}
+            {postings.map(posting => <JobPosting jobPostings={jobPostings} setJobPostings={setJobPostings} setCurrentUser={setCurrentUser} currentUser={currentUser} userProfile={userProfile} key={posting.id} {...posting} apps={applications} setApps={setApplications}/>)}
             
         </VStack>
     )

@@ -3,12 +3,13 @@ import { Box, Text, HStack, Link } from "@chakra-ui/react";
 import { TimeIcon } from '@chakra-ui/icons';
 import ApplicationModal from './ApplicationModal';
 import ApplicationAccordion from './ApplicationAccordion';
+import EditJobFormDrawer from './EditJobFormDrawer';
 import { Icon } from '@iconify/react';
 import calendarEvent from '@iconify-icons/bi/calendar-event';
 import locationIcon from '@iconify-icons/bytesize/location';
 
 
-const JobPosting = ({ role, location, start_date, length_of_time, project_description, user_id, userProfile, currentUser, id, apps, applications, setApps, project_title, project_type, compensation, need_gear }) => {
+const JobPosting = ({  apps, id, currentUser, userProfile, user_id, setApps, role, location, start_date, length_of_time, project_title, project_type, project_description, compensation, need_gear, applications, setJobPostings, jobPostings, setCurrentUser }) => {
     const [toggleShowDetails, setToggleShowDetails] = useState(false)
 
     const checkApps = () => {
@@ -35,7 +36,7 @@ const JobPosting = ({ role, location, start_date, length_of_time, project_descri
                 </HStack>
                 <HStack>
                     <Icon icon={calendarEvent} />
-                    <Text> Starts {start_date.split(",")[0]}</Text>
+                    <Text> Starts {start_date}</Text>
                 </HStack>
                 <HStack>
                     <TimeIcon/>
@@ -52,6 +53,7 @@ const JobPosting = ({ role, location, start_date, length_of_time, project_descri
                 <Text>Project Description: {project_description}</Text>
                 {compensation ? <Text>Compensation: {compensation}</Text> : null}
                 {need_gear ? <Text as="strong">Must provide your own gear.</Text> : null}
+                {userProfile ? <EditJobFormDrawer role={role} lengthOfTime={length_of_time} startDate={start_date} location={location} projectDesc={project_description} projectTitle={project_title} projectType={project_type} compensation={compensation} needGear={need_gear} setJobPostings={setJobPostings} jobPostings={jobPostings} currentUser={currentUser} setCurrentUser={setCurrentUser} id={id}/> : null}
                 {applyButton()}
                 {userProfile && applications.length > 0 ? <ApplicationAccordion applications={applications} /> : null}
             </>

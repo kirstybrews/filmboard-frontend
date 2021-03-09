@@ -60,13 +60,24 @@ function App() {
     if (sort !== "") {
       if (sort === "Start Date") {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        filterJobPostings = filterJobPostings.sort((a, b) => (+(a.start_date.split(" ")[2]) > +(b.start_date.split(" ")[2])) ? 1 : (+(a.start_date.split(" ")[2]) === +(b.start_date.split(" ")[2])) ? ((months.indexOf(a.start_date.split(" ")[0]) > months.indexOf(b.start_date.split(" ")[0])) ? 1 : -1) : (months.indexOf(a.start_date.split(" ")[0]) === months.indexOf(b.start_date.split(" ")[0])) ? ((+(a.start_date.split(/[\s,]+/)[1]) > +(b.start_date.split(/[\s,]+/)[1])) ? 1 : -1) : -1)
+        const sorter = (a, b) => {
+          if (+(a.start_date.split(" ")[2]) !== +(b.start_date.split(" ")[2])) {
+            return +(a.start_date.split(" ")[2]) - +(b.start_date.split(" ")[2])
+          } else if (+(a.start_date.split(" ")[2]) === +(b.start_date.split(" ")[2])) {
+            if (months.indexOf(a.start_date.split(" ")[0]) === months.indexOf(b.start_date.split(" ")[0])) {
+              return +(a.start_date.split(/[\s,]+/)[1]) - +(b.start_date.split(/[\s,]+/)[1])
+            } else {
+              return months.indexOf(a.start_date.split(" ")[0]) - months.indexOf(b.start_date.split(" ")[0])
+            }
+          }
+        }
+        filterJobPostings = filterJobPostings.sort(sorter)
       } else {
         const times = ["day(s)", 'week(s)', "month(s)", "year(s)"]
         const sorter = (a, b) => {
-          if(a.length_of_time.split(" ")[1] !== b.length_of_time.split(" ")[1]){
+          if(times.indexOf(a.length_of_time.split(" ")[1]) !== times.indexOf(b.length_of_time.split(" ")[1])){
              return times.indexOf(a.length_of_time.split(" ")[1]) - times.indexOf(b.length_of_time.split(" ")[1]);
-          }else if (a.length_of_time.split(" ")[1] === b.length_of_time.split(" ")[1]) {
+          }else if (times.indexOf(a.length_of_time.split(" ")[1]) === times.indexOf(b.length_of_time.split(" ")[1])) {
              return +a.length_of_time.split(" ")[0] - +b.length_of_time.split(" ")[0]
           };
         };

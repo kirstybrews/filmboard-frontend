@@ -9,12 +9,10 @@ import {
     DrawerCloseButton,
     useDisclosure,
     Link,
-    HStack,
     Input,
     Button,
     VStack,
     Textarea,
-    Spacer,
     NumberInput,
     NumberInputField,
     RadioGroup,
@@ -30,25 +28,24 @@ import {
     Flex,
     Box
 } from "@chakra-ui/react";
-import { AddIcon } from '@chakra-ui/icons';
 import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
 const JOBS_URL = 'http://localhost:3000/job_postings/';
 
-const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUser }) => {
+const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUser, id, role, startDate, lengthOfTime, location, projectDesc, projectTitle, projectType, compensation, needGear }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
 
-    const [role, setRole] = useState("")
-    const [startDate, setStartDate] = useState(new Date())
-    const [lengthOfTime, setLengthOfTime] = useState("")
-    const [location, setLocation] = useState("")
-    const [projectDescription, setProjectDescription] = useState("")
-    const [timeFormat, setTimeFormat] = useState("")
-    const [projectTitle, setProjectTitle] = useState("")
-    const [projectType, setProjectType] = useState("")
-    const [compensation, setCompensation] = useState("")
-    const [needGear, setNeedGear] = useState(false)
+    const [editRole, setRole] = useState(role)
+    const [editStartDate, setStartDate] = useState(new Date(startDate))
+    const [editLengthOfTime, setLengthOfTime] = useState(lengthOfTime.split(" ")[0])
+    const [editLocation, setLocation] = useState(location)
+    const [projectDescription, setProjectDescription] = useState(projectDesc)
+    const [editTimeFormat, setTimeFormat] = useState(lengthOfTime.split(" ")[1])
+    const [editProjectTitle, setProjectTitle] = useState(projectTitle)
+    const [editProjectType, setProjectType] = useState(projectType)
+    const [editCompensation, setCompensation] = useState(compensation)
+    const [editNeedGear, setNeedGear] = useState(needGear)
 
     const longEnUSFormatter = new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
@@ -58,49 +55,50 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const newDate = longEnUSFormatter.format(startDate)
-        const newLengthOfTime = lengthOfTime + " " + timeFormat
+        const newDate = longEnUSFormatter.format(editStartDate)
+        const newLengthOfTime = editLengthOfTime + " " + editTimeFormat
         const newJobPosting = {
-            role: role,
+            role: editRole,
             start_date: newDate,
             length_of_time: newLengthOfTime,
-            location: location,
+            location: editLocation,
             project_description: projectDescription,
-            user_id: currentUser.id,
-            project_title: projectTitle,
-            project_type: projectType,
-            compensation: compensation,
-            need_gear: needGear
+            project_title: editProjectTitle,
+            project_type: editProjectType,
+            compensation: editCompensation,
+            need_gear: editNeedGear
         }
 
         const reqPack = {
             headers: {
                 "Content-Type": "application/json"
             },
-            method: "POST",
+            method: "PATCH",
             body: JSON.stringify(newJobPosting)
         }
-        fetch(JOBS_URL, reqPack)
+        fetch(JOBS_URL + id, reqPack)
             .then(r => r.json())
             .then(jobPosting => {
                 if (jobPosting.error_message) {
                     alert(jobPosting.error_message)
                 } else {
                     const updatedJobs = currentUser.job_postings
-                    updatedJobs.push(jobPosting)
-                    currentUser.job_postings = updatedJobs
-                    setCurrentUser(currentUser)
-                    setJobPostings([...jobPostings, jobPosting])
+                    updatedJobs.map(job => job.id === jobPosting.id ? jobPosting : job)
+                    const updatedUser = currentUser
+                    updatedUser.job_postings = updatedJobs
+                    const updatedAllJobs = jobPostings
+                    updatedAllJobs.map(job => job.id === jobPosting.id ? jobPosting : job)
+                    setCurrentUser(updatedUser)
+                    setJobPostings(updatedAllJobs)
                     onClose()
                 }
             })
     }
     return (
         <>
-            <HStack>
-                <AddIcon />
-                <Link onClick={onOpen}>Create Job Posting</Link>
-            </HStack>
+            <br/>
+            <Link color="teal.500" onClick={onOpen}>Edit Job Posting</Link>
+            <br/>
             <Drawer
                 isOpen={isOpen}
                 placement="right"
@@ -113,7 +111,7 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
 
                         <DrawerContent bgGradient="linear(green.200, purple.200)">
                             <DrawerCloseButton />
-                            <DrawerHeader>Create New Job Posting</DrawerHeader>
+                            <DrawerHeader>Edit Job Posting</DrawerHeader>
 
                             <DrawerBody>
                                 <VStack spacing="24px" alignItems="left">
@@ -121,12 +119,12 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                         <FormLabel>
                                             Role:
                                         </FormLabel>
-                                        <Input bg="white" placeholder="i.e. Cinematographer" onChange={e => setRole(e.target.value)} />
+                                        <Input value={editRole} bg="white" placeholder="i.e. Cinematographer" onChange={e => setRole(e.target.value)} />
                                     </FormControl>
                                     <FormControl >
                                         <FormLabel>Start Date:</FormLabel>
                                         <Flatpickr
-                                            value={startDate}
+                                            value={editStartDate}
                                             onChange={date => {
                                                 setStartDate(new Date(date))
                                             }}
@@ -141,8 +139,8 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                         <Flex >
                                             <Box w="25%" mr="8">
 
-                                                <NumberInput onChange={setLengthOfTime}>
-                                                    <NumberInputField bg="white"  />
+                                                <NumberInput value={editLengthOfTime} onChange={setLengthOfTime}>
+                                                    <NumberInputField  bg="white"  />
                                                     <NumberInputStepper>
                                                         <NumberIncrementStepper />
                                                         <NumberDecrementStepper />
@@ -152,7 +150,7 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                             
                                             <Box>
 
-                                                <RadioGroup onChange={setTimeFormat} value={timeFormat}>
+                                                <RadioGroup onChange={setTimeFormat} value={editTimeFormat}>
                                                     <Stack direction="column" >
                                                         <Radio value="day(s)">days(s)</Radio>
                                                         <Radio value="week(s)">week(s)</Radio>
@@ -167,31 +165,31 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                         <FormLabel>
                                             Location:
                                         </FormLabel>
-                                        <Input bg="white" placeholder="i.e. Austin, TX" onChange={e => setLocation(e.target.value)} />
+                                        <Input value={editLocation} bg="white" placeholder="i.e. Austin, TX" onChange={e => setLocation(e.target.value)} />
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
                                             Compensation:
                                         </FormLabel>
-                                        <Input bg="white" placeholder="i.e. Meals provided." onChange={e => setCompensation(e.target.value)} />
+                                        <Input value={editCompensation} bg="white" placeholder="i.e. Meals provided." onChange={e => setCompensation(e.target.value)} />
                                     </FormControl>
                                     <FormControl display="flex" alignItems="center">
                                         <FormLabel mb="0">
                                             Must provide own gear?
                                         </FormLabel>
-                                        <Switch onChange={() => setNeedGear(true)}/>
+                                        <Switch isChecked={editNeedGear} onChange={() => setNeedGear(!editNeedGear)}/>
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
                                             Project Title:
                                         </FormLabel>
-                                        <Input bg="white"  onChange={e => setProjectTitle(e.target.value)} />
+                                        <Input bg="white" value={editProjectTitle} onChange={e => setProjectTitle(e.target.value)} />
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
                                             Project Type:
                                         </FormLabel>
-                                        <Select bg="white" placeholder="Select" onChange={e => setProjectType(e.target.value)}>
+                                        <Select value={editProjectType} bg="white" placeholder="Select" onChange={e => setProjectType(e.target.value)}>
                                             <option value="Feature Length Film">Feature Length Film</option>
                                             <option value="Short Film">Short Film</option>
                                             <option value="Web Series">Web Series</option>
@@ -204,7 +202,7 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                         <FormLabel>
                                             Project Description:
                                         </FormLabel>
-                                        <Textarea bg="white"  onChange={e => setProjectDescription(e.target.value)} />
+                                        <Textarea bg="white" value={projectDescription} onChange={e => setProjectDescription(e.target.value)} />
                                     </FormControl>
                                 </VStack>
                             </DrawerBody>
@@ -216,7 +214,7 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                     type="submit"
                                     color="white"
                                 >
-                                    Post Job!
+                                    Edit Job!
                                 </Button>
                             </DrawerFooter>
                         </DrawerContent>
