@@ -18,7 +18,7 @@ import {
 const USERS_URL = 'http://localhost:3000/users/'
 
 
-const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch, avatar, bio, username, searchLocation, setSearchLocation, sort, setSort }) => {
+const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch, avatar, bio, username, searchLocation, setSearchLocation, sort, setSort, gearNeeds, setGearNeeds }) => {
     const [isOpen, setIsOpen] = useState(false)
     const onClose = () => setIsOpen(false)
     const cancelRef = useRef()
@@ -78,6 +78,8 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearc
                         setSearchLocation={setSearchLocation}
                         sort={sort}
                         setSort={setSort}
+                        gearNeeds={gearNeeds}
+                        setGearNeeds={setGearNeeds}
                     />}
 
             </VStack>

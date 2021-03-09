@@ -24,6 +24,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
   const [sort, setSort] = useState("")
+  const [gearNeeds, setGearNeeds] = useState(false)
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -85,14 +86,19 @@ function App() {
       }
     };
 
+    if (gearNeeds) {
+      filterJobPostings = filterJobPostings.filter(job => !job.need_gear)
+    }
+
     return filterJobPostings
   }
+
 
   return (
     <Router>
       <Route exact path="/jobs" render={() => 
         <Flex minH="100vh" direction="column">
-          <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser} setSearch={setSearch} setSearchLocation={setSearchLocation} setSort={setSort}/>
+          <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser} setSearch={setSearch} setSearchLocation={setSearchLocation} setSort={setSort} setGearNeeds={setGearNeeds}/>
           <Box w="100%" h="20px" bgGradient="linear(to-r, green.200, purple.200)"/>
           <Flex pt="8" mr="6" ml="6" mb="150px">
             <SideContainer 
@@ -102,6 +108,8 @@ function App() {
               setSearch={setSearch}
               sort={sort}
               setSort={setSort}
+              gearNeeds={gearNeeds}
+              setGearNeeds={setGearNeeds}
             />
             <Spacer />
             <MainContainer userProfile={userProfile} currentUser={currentUser} jobPostings={filter()}/>
@@ -142,6 +150,7 @@ function App() {
             setSearch={setSearch}
             setSearchLocation={setSearchLocation}
             setSort={setSort}
+            setGearNeeds={setGearNeeds}
           />
         : <Redirect to="/login"/>
       )}/>
