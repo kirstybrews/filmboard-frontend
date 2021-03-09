@@ -17,29 +17,24 @@ const NavBar = ({ currentUser, setCurrentUser, userProfile, setSearch, setSearch
         setSort("")
     }
     return (
-        <Flex as="nav" mr="2" ml="2" mt="2" p="2">
-            {currentUser
-            ? <>
-            <Box >
-                <Button 
-                    size="lg" 
-                    onClick={() => userProfile ? handleClick('/') : handleClick('/user_profile')} 
-                    variant="ghost">
-                        {userProfile ? "Discover Jobs" : "My Profile"}
-                </Button>
-            </Box>
-            <Spacer/>
-            </>  
-            : null}
+        <Flex as="nav" mr="2" ml="2" mt="2" pl="2" pr="2">
             <Logo/>
             <Spacer />
             {currentUser
-            ? <Box pt="1">
+            ? <Box pt="7">
+                <Button  
+                    onClick={() => userProfile ? handleClick('/jobs') : handleClick('/user_profile')} 
+                    backgroundColor="black"
+                    color="white"
+                    mr="4"
+                >
+                    {userProfile ? "Discover Jobs" : "My Profile"}
+                </Button>
                 <Button onClick={logOut} backgroundColor="black" color="white" mr="4">
                     Log Out
                 </Button>
             </Box>
-            : <Box pt="1">
+            : <Box pt="7">
                 <Button onClick={() => handleClick('/login')} backgroundColor="black" color="white" mr="4">
                     Log In
                 </Button>

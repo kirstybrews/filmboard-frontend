@@ -8,7 +8,7 @@ import calendarEvent from '@iconify-icons/bi/calendar-event';
 import locationIcon from '@iconify-icons/bytesize/location';
 
 
-const JobPosting = ({ role, location, start_date, length_of_time, project_description, user_id, userProfile, currentUser, id, apps, applications, setApps }) => {
+const JobPosting = ({ role, location, start_date, length_of_time, project_description, user_id, userProfile, currentUser, id, apps, applications, setApps, project_title, project_type, compensation, need_gear }) => {
     const [toggleShowDetails, setToggleShowDetails] = useState(false)
 
     const checkApps = () => {
@@ -47,9 +47,13 @@ const JobPosting = ({ role, location, start_date, length_of_time, project_descri
             </HStack>
             {toggleShowDetails
             ? <>
+                <Text>Project Title: {project_title}</Text>
+                <Text>Project Type: {project_type}</Text>
                 <Text>Project Description: {project_description}</Text>
+                {compensation ? <Text>Compensation: {compensation}</Text> : null}
+                {need_gear ? <Text as="strong">Must provide your own gear.</Text> : null}
                 {applyButton()}
-                {userProfile ? <ApplicationAccordion applications={applications} /> : null}
+                {userProfile && applications.length > 0 ? <ApplicationAccordion applications={applications} /> : null}
             </>
             : null}
         </Box>

@@ -4,8 +4,8 @@ import { Image, Box } from "@chakra-ui/react";
 
 const Logo = () => {
     return (
-        <Box align="center" mb="24px">
-            <Image src={logo} alt="logo" boxSize="84px" />
+        <Box align="center" mb="20px" pt="2">
+            <Image src={logo} alt="logo" boxSize="74px" />
         </Box>
     )
 }

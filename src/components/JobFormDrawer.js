@@ -22,7 +22,11 @@ import {
     Radio,
     NumberInputStepper,
     NumberDecrementStepper,
-    NumberIncrementStepper
+    NumberIncrementStepper,
+    Select,
+    Switch,
+    FormControl,
+    FormLabel
 } from "@chakra-ui/react";
 import { AddIcon } from '@chakra-ui/icons';
 import "flatpickr/dist/themes/material_green.css";
@@ -39,6 +43,10 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
     const [location, setLocation] = useState("")
     const [projectDescription, setProjectDescription] = useState("")
     const [timeFormat, setTimeFormat] = useState("")
+    const [projectTitle, setProjectTitle] = useState("")
+    const [projectType, setProjectType] = useState("")
+    const [compensation, setCompensation] = useState("")
+    const [needGear, setNeedGear] = useState(false)
 
     const longEnUSFormatter = new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
@@ -56,9 +64,13 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
             length_of_time: newLengthOfTime,
             location: location,
             project_description: projectDescription,
-            user_id: currentUser.id
+            user_id: currentUser.id,
+            project_title: projectTitle,
+            project_type: projectType,
+            compensation: compensation,
+            need_gear: needGear
         }
-        
+
         const reqPack = {
             headers: {
                 "Content-Type": "application/json"
@@ -103,7 +115,7 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
 
                             <DrawerBody>
                                 <VStack spacing="24px" alignItems="left">
-                                    <Input bg="white" placeholder="What role are you looking for?" onChange={e => setRole(e.target.value)}/>
+                                    <Input bg="white" placeholder="What role are you looking for?" onChange={e => setRole(e.target.value)} />
                                     <VStack alignItems="left">
                                         <Text color="grey" >Start Date:</Text>
                                         <Flatpickr
@@ -131,6 +143,22 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                         </Stack>
                                     </RadioGroup>
                                     <Input bg="white" placeholder="Location?" onChange={e => setLocation(e.target.value)} />
+                                    <Input bg="white" placeholder="Compensation (i.e. 'Meals provided', etc.)" onChange={e => setCompensation(e.target.value)} />
+                                    <FormControl display="flex" alignItems="center">
+                                        <FormLabel color="grey" mb="0">
+                                            Must provide own gear?
+                                        </FormLabel>
+                                        <Switch onChange={() => setNeedGear(true)}/>
+                                    </FormControl>
+                                    <Input bg="white" placeholder="Project Title" onChange={e => setProjectTitle(e.target.value)} />
+                                    <Select bg="white" placeholder="Project Type" onChange={e => setProjectType(e.target.value)}>
+                                        <option value="Feature Length Film">Feature Length Film</option>
+                                        <option value="Short Film">Short Film</option>
+                                        <option value="Web Series">Web Series</option>
+                                        <option value="Documentary">Documentary</option>
+                                        <option value="Music Video">Music Video</option>
+                                        <option value="Other">Other</option>
+                                    </Select>
                                     <Textarea bg="white" placeholder="Provide a description for this project." onChange={e => setProjectDescription(e.target.value)} />
                                 </VStack>
                             </DrawerBody>

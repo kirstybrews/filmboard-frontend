@@ -7,11 +7,13 @@ import {
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import UserProfile from './components/UserProfile';
-import NavBar from './components/NavBar'
+import NavBar from './components/NavBar';
+import NavBarCopy from './components/NavBarCopy';
 import MainContainer from './components/MainContainer';
 import SideContainer from './components/SideContainer';
 import Footer from './components/Footer'
-import { Flex, Spacer } from "@chakra-ui/react";
+import { Flex, Spacer, Image, Box } from "@chakra-ui/react";
+import LandingPage from './components/landing_page.png';
 
 const JOB_POSTINGS_URL = 'http://localhost:3000/job_postings/';
 
@@ -77,10 +79,11 @@ function App() {
 
   return (
     <Router>
-      <Route exact path="/" render={() => 
-        <Flex minH="100vh" direction="column" >
+      <Route exact path="/jobs" render={() => 
+        <Flex minH="100vh" direction="column">
           <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser} setSearch={setSearch} setSearchLocation={setSearchLocation} setSort={setSort}/>
-          <Flex mr="6" ml="6" mb="150px" >
+          <Box w="100%" h="20px" bgGradient="linear(to-r, green.200, purple.200)"/>
+          <Flex pt="8" mr="6" ml="6" mb="150px">
             <SideContainer 
               searchLocation={searchLocation} 
               setSearchLocation={setSearchLocation} 
@@ -95,6 +98,14 @@ function App() {
           <Footer/>
         </Flex>
       }/>
+      <Route exact path="/" render={() => (
+        <Flex minH="100vh" direction="column" bg="black">
+          <Flex bg="black">
+          <NavBarCopy />
+            <Image src={LandingPage} minH="100vh"/>
+          </Flex>
+        </Flex>
+      )}/>
 
       <Route exact path="/login" render={() => (
         currentUser === null
