@@ -4,7 +4,10 @@ import {
     AccordionButton,
     AccordionPanel,
     AccordionIcon,
-    Box
+    Box,
+    Avatar,
+    Text,
+    HStack
 } from "@chakra-ui/react";
 
 const ApplicationAccordionItem = ({ user, message }) => {
@@ -13,7 +16,10 @@ const ApplicationAccordionItem = ({ user, message }) => {
             <h2>
                 <AccordionButton>
                     <Box flex="1" textAlign="left">
-                        {user.name}
+                        <HStack>
+                            <Avatar mr="4" src={user.avatar}/>
+                            <Text mt="2">{user.name}</Text>
+                        </HStack>
                     </Box>
                     <AccordionIcon />
                 </AccordionButton>
