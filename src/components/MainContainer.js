@@ -24,6 +24,7 @@ const MainContainer = ({ jobPostings, userProfile, currentUser, setJobPostings, 
                 <TabList >
                     <Tab>My Job Postings</Tab>
                     <Tab>My Applications</Tab>
+                    {/* <Tab>Archived</Tab> */}
                 </TabList>
                 <TabPanels>
                     <TabPanel>

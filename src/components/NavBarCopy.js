@@ -1,5 +1,4 @@
 import React from 'react';
-import Logo from './Logo';
 import FooterLogo from './footer_logo.png';
 import { Flex, Box, Button, Image } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';

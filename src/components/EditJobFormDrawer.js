@@ -32,7 +32,7 @@ import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
 const JOBS_URL = 'http://localhost:3000/job_postings/';
 
-const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUser, id, role, startDate, lengthOfTime, location, projectDesc, projectTitle, projectType, compensation, needGear }) => {
+const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCurrentUser, id, role, startDate, lengthOfTime, location, projectDesc, projectTitle, projectType, compensation, needGear }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
 
@@ -46,6 +46,7 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
     const [editProjectType, setProjectType] = useState(projectType)
     const [editCompensation, setCompensation] = useState(compensation)
     const [editNeedGear, setNeedGear] = useState(needGear)
+    const [editStatus, setStatus] = useState(status)
 
     const longEnUSFormatter = new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
@@ -66,7 +67,8 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
             project_title: editProjectTitle,
             project_type: editProjectType,
             compensation: editCompensation,
-            need_gear: editNeedGear
+            need_gear: editNeedGear,
+            status: editStatus
         }
 
         const reqPack = {
@@ -76,7 +78,7 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
             method: "PATCH",
             body: JSON.stringify(newJobPosting)
         }
-        
+
         fetch(JOBS_URL + id, reqPack)
             .then(r => r.json())
             .then(jobPosting => {
@@ -97,9 +99,9 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
     }
     return (
         <>
-            <br/>
+
             <Link color="teal.500" onClick={onOpen}>Edit Job Posting</Link>
-            <br/>
+            <br />
             <Drawer
                 isOpen={isOpen}
                 placement="right"
@@ -141,14 +143,14 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                             <Box w="25%" mr="8">
 
                                                 <NumberInput value={editLengthOfTime} onChange={setLengthOfTime}>
-                                                    <NumberInputField  bg="white"  />
+                                                    <NumberInputField bg="white" />
                                                     <NumberInputStepper>
                                                         <NumberIncrementStepper />
                                                         <NumberDecrementStepper />
                                                     </NumberInputStepper>
                                                 </NumberInput>
                                             </Box>
-                                            
+
                                             <Box>
 
                                                 <RadioGroup onChange={setTimeFormat} value={editTimeFormat}>
@@ -178,7 +180,7 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                         <FormLabel mb="0">
                                             Must provide own gear?
                                         </FormLabel>
-                                        <Switch isChecked={editNeedGear} onChange={() => setNeedGear(!editNeedGear)}/>
+                                        <Switch isChecked={editNeedGear} onChange={() => setNeedGear(!editNeedGear)} />
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
@@ -204,6 +206,16 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                             Project Description:
                                         </FormLabel>
                                         <Textarea bg="white" value={projectDescription} onChange={e => setProjectDescription(e.target.value)} />
+                                    </FormControl>
+                                    <FormControl>
+                                        <FormLabel>
+                                            Status:
+                                        </FormLabel>
+                                        <Select value={editStatus} onChange={e => setStatus(e.target.value)} bg="white" >
+                                            <option value="Accepting Applicants">Accepting Applicants</option>
+                                            <option value="Reviewing Applicants">Reviewing Applicants</option>
+                                            <option value="Role Has Been Filled">Role Has Been Filled</option>
+                                        </Select>
                                     </FormControl>
                                 </VStack>
                             </DrawerBody>
