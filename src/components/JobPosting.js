@@ -27,9 +27,9 @@ const JobPosting = ({  apps, id, currentUser, userProfile, user_id, setApps, rol
     }
 
     return (
-        <Box p="2" bg="green.100">
+        <Box p={5} shadow="md" borderWidth="1px">
             <Text fontSize="lg">{role}</Text>
-            <HStack spacing="24px">
+            <HStack mt="1" spacing="24px">
                 <HStack>
                     <Icon icon={locationIcon} mt="4"/>
                     <Text>{location}</Text> 
@@ -48,13 +48,13 @@ const JobPosting = ({  apps, id, currentUser, userProfile, user_id, setApps, rol
             </HStack>
             {toggleShowDetails
             ? <>
-                
+                <Box w="100%" h="3px" mt="3" mb="3" bgGradient="linear(to-r, green.200, purple.200)"/>
                 <Text>Project Title: {project_title}</Text>
                 <Text>Project Type: {project_type}</Text>
-                <Text>Project Description: {project_description}</Text>
-                {compensation !== "None" ? <Text>Compensation: {compensation}</Text> : null}
+                <Text mb="2">Project Description: {project_description}</Text>
+                {compensation !== "None" ? <Text >Compensation: {compensation}</Text> : null}
                 {need_gear ? <Text as="strong">Must provide your own gear.</Text> : null}
-                {userProfile ? <Text>Status: {status}</Text> : null}
+                {userProfile ? <Text mt="1" >Status: {status}</Text> : null}
                 {userProfile ? <EditJobFormDrawer status={status} role={role} lengthOfTime={length_of_time} startDate={start_date} location={location} projectDesc={project_description} projectTitle={project_title} projectType={project_type} compensation={compensation} needGear={need_gear} setJobPostings={setJobPostings} jobPostings={jobPostings} currentUser={currentUser} setCurrentUser={setCurrentUser} id={id}/> : null}
                 {applyButton()}
                 {userProfile && applications.length > 0 ? <ApplicationAccordion applications={applications} /> : null}

@@ -99,7 +99,7 @@ const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCu
     }
     return (
         <>
-
+            
             <Link color="teal.500" onClick={onOpen}>Edit Job Posting</Link>
             <br />
             <Drawer
