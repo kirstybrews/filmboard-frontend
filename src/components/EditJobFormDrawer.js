@@ -26,7 +26,8 @@ import {
     FormControl,
     FormLabel,
     Flex,
-    Box
+    Box,
+    Text
 } from "@chakra-ui/react";
 import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
@@ -47,6 +48,7 @@ const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCu
     const [editCompensation, setCompensation] = useState(compensation)
     const [editNeedGear, setNeedGear] = useState(needGear)
     const [editStatus, setStatus] = useState(status)
+    const [errors, setErrors] = useState({})
 
     const longEnUSFormatter = new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
@@ -82,8 +84,8 @@ const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCu
         fetch(JOBS_URL + id, reqPack)
             .then(r => r.json())
             .then(jobPosting => {
-                if (jobPosting.error_message) {
-                    alert(jobPosting.error_message)
+                if (jobPosting.errors) {
+                    setErrors(jobPosting.errors)
                 } else {
                     let updatedJobs = currentUser.job_postings
                     updatedJobs = updatedJobs.map(job => job.id === jobPosting.id ? jobPosting : job)
@@ -123,6 +125,7 @@ const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCu
                                             Role:
                                         </FormLabel>
                                         <Input value={editRole} bg="white" placeholder="i.e. Cinematographer" onChange={e => setRole(e.target.value)} />
+                                        {errors.role ? <Text  fontSize="sm" color="red">Role {errors.role[0]}</Text> : null}
                                     </FormControl>
                                     <FormControl >
                                         <FormLabel>Start Date:</FormLabel>
@@ -134,6 +137,7 @@ const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCu
                                             options={{ dateFormat: "F j, Y" }}
                                             placeholder="Start date..."
                                         />
+                                        {errors.start_date ? <Text  fontSize="sm" color="red">Start date {errors.start_date[0]}</Text> : null}
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
@@ -162,6 +166,7 @@ const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCu
                                                     </Stack>
                                                 </RadioGroup>
                                             </Box>
+                                            {errors.length_of_time ? <Text ml="6" fontSize="sm" color="red">Length of time {errors.length_of_time[0]}</Text> : null}
                                         </Flex>
                                     </FormControl>
                                     <FormControl>
@@ -169,6 +174,7 @@ const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCu
                                             Location:
                                         </FormLabel>
                                         <Input value={editLocation} bg="white" placeholder="i.e. Austin, TX" onChange={e => setLocation(e.target.value)} />
+                                        {errors.location ? <Text  fontSize="sm" color="red">Location {errors.location[0]}</Text> : null}
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
@@ -187,6 +193,7 @@ const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCu
                                             Project Title:
                                         </FormLabel>
                                         <Input bg="white" value={editProjectTitle} onChange={e => setProjectTitle(e.target.value)} />
+                                        {errors.project_title ? <Text  fontSize="sm" color="red">Project title {errors.project_title[0]}</Text> : null}
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
@@ -200,12 +207,14 @@ const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCu
                                             <option value="Music Video">Music Video</option>
                                             <option value="Other">Other</option>
                                         </Select>
+                                        {errors.project_type ? <Text  fontSize="sm" color="red">Project type {errors.project_type[0]}</Text> : null}
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
                                             Project Description:
                                         </FormLabel>
                                         <Textarea bg="white" value={projectDescription} onChange={e => setProjectDescription(e.target.value)} />
+                                        {errors.project_description ? <Text  fontSize="sm" color="red">Project description {errors.project_description[0]}</Text> : null}
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
