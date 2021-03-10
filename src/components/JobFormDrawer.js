@@ -14,7 +14,6 @@ import {
     Button,
     VStack,
     Textarea,
-    Spacer,
     NumberInput,
     NumberInputField,
     RadioGroup,
@@ -28,7 +27,8 @@ import {
     FormControl,
     FormLabel,
     Flex,
-    Box
+    Box,
+    FormHelperText
 } from "@chakra-ui/react";
 import { AddIcon } from '@chakra-ui/icons';
 import "flatpickr/dist/themes/material_green.css";
@@ -47,7 +47,7 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
     const [timeFormat, setTimeFormat] = useState("")
     const [projectTitle, setProjectTitle] = useState("")
     const [projectType, setProjectType] = useState("")
-    const [compensation, setCompensation] = useState("")
+    const [compensation, setCompensation] = useState("None")
     const [needGear, setNeedGear] = useState(false)
 
     const longEnUSFormatter = new Intl.DateTimeFormat('en-US', {
@@ -70,7 +70,8 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
             project_title: projectTitle,
             project_type: projectType,
             compensation: compensation,
-            need_gear: needGear
+            need_gear: needGear,
+            status: "Accepting Applicants"
         }
 
         const reqPack = {
@@ -142,14 +143,14 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                             <Box w="25%" mr="8">
 
                                                 <NumberInput onChange={setLengthOfTime}>
-                                                    <NumberInputField bg="white"  />
+                                                    <NumberInputField bg="white" />
                                                     <NumberInputStepper>
                                                         <NumberIncrementStepper />
                                                         <NumberDecrementStepper />
                                                     </NumberInputStepper>
                                                 </NumberInput>
                                             </Box>
-                                            
+
                                             <Box>
 
                                                 <RadioGroup onChange={setTimeFormat} value={timeFormat}>
@@ -179,13 +180,13 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                         <FormLabel mb="0">
                                             Must provide own gear?
                                         </FormLabel>
-                                        <Switch onChange={() => setNeedGear(true)}/>
+                                        <Switch onChange={() => setNeedGear(true)} />
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
                                             Project Title:
                                         </FormLabel>
-                                        <Input bg="white"  onChange={e => setProjectTitle(e.target.value)} />
+                                        <Input bg="white" onChange={e => setProjectTitle(e.target.value)} />
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>
@@ -204,7 +205,18 @@ const JobFormDrawer = ({ setJobPostings, jobPostings, currentUser, setCurrentUse
                                         <FormLabel>
                                             Project Description:
                                         </FormLabel>
-                                        <Textarea bg="white"  onChange={e => setProjectDescription(e.target.value)} />
+                                        <Textarea bg="white" onChange={e => setProjectDescription(e.target.value)} />
+                                    </FormControl>
+                                    <FormControl>
+                                        <FormLabel>
+                                            Status:
+                                        </FormLabel>
+                                        <Select value="Accepting Applicants" bg="white" >
+                                            <option value="Accepting Applicants">Accepting Applicants</option>
+                                            <option isDisabled value="Reviewing Applicants">Reviewing Applicants</option>
+                                            <option isDisabled value="Role Has Been Filled">Role Has Been Filled</option>
+                                        </Select>
+                                        <FormHelperText>You'll be able to change status after creating the job posting.</FormHelperText>
                                     </FormControl>
                                 </VStack>
                             </DrawerBody>

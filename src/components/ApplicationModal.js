@@ -44,6 +44,7 @@ const ApplicationModal = ({ jobPostingId, app, currentUser, apps, setApps}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
+            <br/>
             {app()
             ? <Button onClick={onOpen} backgroundColor="black" color="white">Apply Now!</Button>
             : <Button isDisabled backgroundColor="black" color="white">Already Applied</Button>}

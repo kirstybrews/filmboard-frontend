@@ -6,7 +6,7 @@ const ApplicationAccordion = ({ applications }) => {
     return (
         <>
             Applications:
-            <Accordion allowToggle p="4">
+            <Accordion allowToggle >
                 {applications.map(application => <ApplicationAccordionItem key={application.id} {...application}/>)}
             </Accordion>
         </>
