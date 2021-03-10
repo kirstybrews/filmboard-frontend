@@ -32,9 +32,14 @@ const Application = ({ job_posting, message, id }) => {
                 <Box w="100%" h="3px" mt="3" mb="3" bgGradient="linear(to-r, green.200, purple.200)"/>
                 <Text>Project Title: {project_title}</Text>
                 <Text>Project Type: {project_type}</Text>
-                <Text>Project Description: {project_description}</Text>
-                {compensation !== "None" ? <Text>Compensation: {compensation}</Text> : null}
-                {need_gear ? <Text as="strong">Must provide your own gear.</Text> : null}
+                <Text mb="3">Project Description: {project_description}</Text>
+                {compensation !== "None" ? <Text >Compensation: {compensation}</Text> : null}
+                {need_gear 
+                ? <HStack>
+                    <Text>Gear Needs:</Text>
+                    <Text as="strong">Must provide your own gear.</Text>
+                </HStack> 
+                : null}
            
                 <Text mt="3">Your Message: </Text>
                 <ApplicationMessage id={id} message={message}/>

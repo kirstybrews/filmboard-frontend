@@ -51,10 +51,15 @@ const JobPosting = ({  apps, id, currentUser, userProfile, user_id, setApps, rol
                 <Box w="100%" h="3px" mt="3" mb="3" bgGradient="linear(to-r, green.200, purple.200)"/>
                 <Text>Project Title: {project_title}</Text>
                 <Text>Project Type: {project_type}</Text>
-                <Text mb="2">Project Description: {project_description}</Text>
+                <Text mb="3">Project Description: {project_description}</Text>
                 {compensation !== "None" ? <Text >Compensation: {compensation}</Text> : null}
-                {need_gear ? <Text as="strong">Must provide your own gear.</Text> : null}
-                {userProfile ? <Text mt="1" >Status: {status}</Text> : null}
+                {need_gear 
+                ? <HStack>
+                    <Text>Gear Needs:</Text>
+                    <Text as="strong">Must provide your own gear.</Text>
+                </HStack> 
+                : null}
+                {userProfile ? <Text mt="3" mb="3" >Status: {status}</Text> : null}
                 {userProfile ? <EditJobFormDrawer status={status} role={role} lengthOfTime={length_of_time} startDate={start_date} location={location} projectDesc={project_description} projectTitle={project_title} projectType={project_type} compensation={compensation} needGear={need_gear} setJobPostings={setJobPostings} jobPostings={jobPostings} currentUser={currentUser} setCurrentUser={setCurrentUser} id={id}/> : null}
                 {applyButton()}
                 {userProfile && applications.length > 0 ? <ApplicationAccordion applications={applications} /> : null}
