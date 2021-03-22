@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Logo from './Logo'
-import { Center, Box, Input, VStack, Button, Text, Tooltip } from "@chakra-ui/react";
+import { Center, Box, Input, VStack, Button, Text, Tooltip, FormHelperText, FormControl } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';
 const USERS_URL = 'http://localhost:3000/users';
 
 const SignUp = () => {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [location, setLocation] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const history = useHistory();
@@ -18,6 +20,8 @@ const SignUp = () => {
             user: {
                 name: name,
                 username: username,
+                email: email,
+                location: location,
                 password: password,
                 password_confirmation: passwordConfirmation
             }
@@ -57,6 +61,19 @@ const SignUp = () => {
                             <Input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder="Username" />
                             {errors.username ? <Text fontSize="sm" color="red">Username {errors.username[0]}</Text> : null}
                         </VStack>
+                        <FormControl>
+                            <VStack w="100%">
+                                <Input value={email} onChange={e => setEmail(e.target.value)} type="text" placeholder="Email" />
+                                {errors.email ? <Text fontSize="sm" color="red">Email {errors.email[0]}</Text> : <FormHelperText>Email will only be shared when you apply to job.</FormHelperText>}
+                            </VStack>
+                        </FormControl>
+                        <FormControl>
+                            <VStack w="100%">
+                                <Input value={location} onChange={e => setLocation(e.target.value)} type="text" placeholder="Location (i.e. Austin, TX)" />
+                                {errors.location ? <Text fontSize="sm" color="red">Location {errors.location[0]}</Text> : <FormHelperText>Location will only be shared when you apply to job.</FormHelperText>}
+                            </VStack>
+                        </FormControl>
+
                         <VStack w ="100%">
                             <Tooltip hasArrow label="Must contain at least 6 characters, a digit, a lower case character, an upper case character, and a symbol." bg="gray.300" color="black">
                                 <Input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" />
