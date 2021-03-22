@@ -13,12 +13,15 @@ import {
     AlertDialogContent,
     AlertDialogOverlay,
     Button,
-    Avatar
+    Avatar,
+    HStack
 } from "@chakra-ui/react";
+import { Icon } from '@iconify/react';
+import locationIcon from '@iconify-icons/bytesize/location';
 const USERS_URL = 'http://localhost:3000/users/'
 
 
-const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch, avatar, bio, username, searchLocation, setSearchLocation, sort, setSort, gearNeeds, setGearNeeds }) => {
+const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch, avatar, bio, username, searchLocation, setSearchLocation, sort, setSort, gearNeeds, setGearNeeds, location }) => {
     const [isOpen, setIsOpen] = useState(false)
     const onClose = () => setIsOpen(false)
     const cancelRef = useRef()
@@ -36,11 +39,15 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearc
             <VStack align="left">
                 {userProfile
                     ? <>
-                        <Avatar src={avatar}/>
+                        <Avatar src={avatar} />
                         <Text fontSize="lg">{name}</Text>
+                        <HStack>
+                            <Icon icon={locationIcon} mt="4" />
+                            <Text>{location}</Text>
+                        </HStack>
                         <Text fontSize="md">{bio ? bio : "404 Bio Not Found"}</Text>
-                        
-                        <UpdateUserModal id={id} name={name} username={username} avatar={avatar} bio={bio} setCurrentUser={setCurrentUser}/>
+
+                        <UpdateUserModal id={id} name={name} username={username} avatar={avatar} bio={bio} setCurrentUser={setCurrentUser} />
                         <Link color="red" onClick={() => setIsOpen(true)}>
                             Delete Account
                         </Link>
@@ -71,8 +78,8 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearc
                             </AlertDialogOverlay>
                         </AlertDialog>
                     </>
-                    : <Filter 
-                        search={search} 
+                    : <Filter
+                        search={search}
                         setSearch={setSearch}
                         searchlocation={searchLocation}
                         setSearchLocation={setSearchLocation}
