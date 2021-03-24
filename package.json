@@ -2,6 +2,10 @@
   "name": "filmboard-frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "15.x",
+    "yarn": "1.x"
+  },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.7",
     "@chakra-ui/react": "^1.4.1",
