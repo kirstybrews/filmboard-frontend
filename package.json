@@ -11,6 +11,11 @@
     "@chakra-ui/react": "^1.4.1",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
+    "@iconify-icons/bi": "^1.1.2",
+    "@iconify-icons/bx": "^1.1.0",
+    "@iconify-icons/bytesize": "^1.1.0",
+    "@iconify-icons/fluent": "^1.1.8",
+    "@iconify/react": "^1.1.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -24,12 +29,7 @@
     "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1",
-    "@iconify-icons/bi": "^1.1.2",
-    "@iconify-icons/bx": "^1.1.0",
-    "@iconify-icons/bytesize": "^1.1.0",
-    "@iconify-icons/fluent": "^1.1.8",
-    "@iconify/react": "^1.1.4"
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -55,5 +55,4 @@
       "last 1 safari version"
     ]
   }
-  
 }
