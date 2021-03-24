@@ -5,7 +5,7 @@ import ApplicationModal from './ApplicationModal';
 import ApplicationAccordion from './ApplicationAccordion';
 import EditJobFormDrawer from './EditJobFormDrawer';
 import { Icon } from '@iconify/react';
-import calendarEvent from '@iconify-icons/bi/calendar-event';
+// import calendarEvent from '@iconify-icons/bi/calendar-event';
 import locationIcon from '@iconify-icons/bytesize/location';
 
 
@@ -35,7 +35,7 @@ const JobPosting = ({  apps, id, currentUser, userProfile, user_id, setApps, rol
                     <Text>{location}</Text> 
                 </HStack>
                 <HStack>
-                    <Icon icon={calendarEvent} />
+                    {/* <Icon icon={calendarEvent} /> */}
                     <Text> Starts {start_date}</Text>
                 </HStack>
                 <HStack>
