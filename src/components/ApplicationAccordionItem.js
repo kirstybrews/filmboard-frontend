@@ -9,7 +9,7 @@ import {
     Text,
     HStack
 } from "@chakra-ui/react";
-import { Icon } from '@iconify/react';
+// import { Icon } from '@iconify/react';
 // import locationIcon from '@iconify-icons/bytesize/location';
 
 

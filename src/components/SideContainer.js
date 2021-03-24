@@ -16,7 +16,7 @@ import {
     Avatar,
     HStack
 } from "@chakra-ui/react";
-import { Icon } from '@iconify/react';
+// import { Icon } from '@iconify/react';
 // import locationIcon from '@iconify-icons/bytesize/location';
 // const USERS_URL = 'http://localhost:3000/users/'
 const USERS_URL = 'https://filmboard-backend.herokuapp.com/users/'

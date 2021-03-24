@@ -4,7 +4,7 @@ import { TimeIcon } from '@chakra-ui/icons';
 import ApplicationModal from './ApplicationModal';
 import ApplicationAccordion from './ApplicationAccordion';
 import EditJobFormDrawer from './EditJobFormDrawer';
-import { Icon } from '@iconify/react';
+// import { Icon } from '@iconify/react';
 // import calendarEvent from '@iconify-icons/bi/calendar-event';
 // import locationIcon from '@iconify-icons/bytesize/location';
 
