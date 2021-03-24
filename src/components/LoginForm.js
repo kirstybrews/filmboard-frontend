@@ -9,7 +9,7 @@ const LoginForm = ({ setCurrentUser }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch("http://localhost:3000/login", { 
+        fetch("https://filmboard-backend.herokuapp.com/login", { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

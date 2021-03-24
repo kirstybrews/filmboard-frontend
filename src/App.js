@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      Promise.all([fetch("http://localhost:3000/decode_token", {
+      Promise.all([fetch("https://filmboard-backend.herokuapp.com/decode_token", {
         headers: {
           "Authenticate": localStorage.token
         }
