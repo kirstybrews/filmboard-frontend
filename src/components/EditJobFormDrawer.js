@@ -31,7 +31,8 @@ import {
 } from "@chakra-ui/react";
 import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
-const JOBS_URL = 'http://localhost:3000/job_postings/';
+// const JOBS_URL = 'http://localhost:3000/job_postings/';
+const JOBS_URL = 'https://filmboard-backend.herokuapp.com/job_postings/';
 
 const JobFormDrawer = ({ status, setJobPostings, jobPostings, currentUser, setCurrentUser, id, role, startDate, lengthOfTime, location, projectDesc, projectTitle, projectType, compensation, needGear }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()

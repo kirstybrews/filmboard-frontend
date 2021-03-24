@@ -9,7 +9,8 @@ import {
     HStack
 } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
-const APPLICATIONS_URL = 'http://localhost:3000/applications/';
+// const APPLICATIONS_URL = 'http://localhost:3000/applications/';
+const APPLICATIONS_URL = 'https://filmboard-backend.herokuapp.com/applications/';
 
 const ApplicationMessage = ({ message, id }) => {
 

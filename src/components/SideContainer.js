@@ -18,7 +18,8 @@ import {
 } from "@chakra-ui/react";
 import { Icon } from '@iconify/react';
 import locationIcon from '@iconify-icons/bytesize/location';
-const USERS_URL = 'http://localhost:3000/users/'
+// const USERS_URL = 'http://localhost:3000/users/'
+const USERS_URL = 'https://filmboard-backend.herokuapp.com/users/'
 
 
 const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearch, avatar, bio, username, searchLocation, setSearchLocation, sort, setSort, gearNeeds, setGearNeeds, location }) => {

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Logo from './Logo'
 import { Center, Box, Input, VStack, Button, Text, Tooltip, FormHelperText, FormControl } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';
-const USERS_URL = 'http://localhost:3000/users';
+// const USERS_URL = 'http://localhost:3000/users';
+const USERS_URL = 'https://filmboard-backend.herokuapp.com/users';
 
 const SignUp = () => {
     const [name, setName] = useState("");

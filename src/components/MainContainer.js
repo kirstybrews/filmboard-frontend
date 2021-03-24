@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import JobPostingContainer from './JobPostingContainer';
 import ApplicationContainer from './ApplicationContainer';
-const APPLICATIONS_URL = 'http://localhost:3000/applications';
+// const APPLICATIONS_URL = 'http://localhost:3000/applications';
+const APPLICATIONS_URL = 'https://filmboard-backend.herokuapp.com/applications';
 
 const MainContainer = ({ jobPostings, userProfile, currentUser, setJobPostings, setCurrentUser}) => {
     const [applications, setApplications] = useState([])

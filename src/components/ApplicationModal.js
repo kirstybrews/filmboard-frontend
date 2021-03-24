@@ -11,7 +11,8 @@ import {
     Button, 
     Textarea
   } from "@chakra-ui/react";
-const APPLICATIONS_URL = 'http://localhost:3000/applications/'
+// const APPLICATIONS_URL = 'http://localhost:3000/applications/'
+const APPLICATIONS_URL = 'https://filmboard-backend.herokuapp.com/applications/'
 
 const ApplicationModal = ({ jobPostingId, app, currentUser, apps, setApps}) => {
     const [message, setMessage] = useState("")

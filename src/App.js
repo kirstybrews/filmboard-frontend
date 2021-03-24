@@ -15,7 +15,8 @@ import Footer from './components/Footer'
 import { Flex, Spacer, Image, Box } from "@chakra-ui/react";
 import LandingPage from './components/landing_page.png';
 
-const JOB_POSTINGS_URL = 'http://localhost:3000/job_postings/';
+// const JOB_POSTINGS_URL = 'http://localhost:3000/job_postings/';
+const JOB_POSTINGS_URL = 'https://filmboard-backend.herokuapp.com/job_postings/';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);

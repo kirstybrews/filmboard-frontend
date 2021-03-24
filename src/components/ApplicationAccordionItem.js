@@ -12,6 +12,7 @@ import {
 import { Icon } from '@iconify/react';
 import locationIcon from '@iconify-icons/bytesize/location';
 
+
 const ApplicationAccordionItem = ({ user, message }) => {
     return (
         <AccordionItem bg="white">

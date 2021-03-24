@@ -15,7 +15,8 @@ import {
     Textarea,
     Text
 } from "@chakra-ui/react"
-const USERS_URL = 'http://localhost:3000/users/'
+// const USERS_URL = 'http://localhost:3000/users/'
+const USERS_URL = 'https://filmboard-backend.herokuapp.com/users/'
 
 const UpdateUserModal = ({ id, name, username, bio, avatar, setCurrentUser}) => {
     const [formName, setFormName] = useState(name);
