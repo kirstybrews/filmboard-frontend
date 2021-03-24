@@ -16,8 +16,8 @@ import {
     Avatar,
     HStack
 } from "@chakra-ui/react";
-// import { Icon } from '@iconify/react';
-// import locationIcon from '@iconify-icons/bytesize/location';
+import { Icon } from '@iconify/react';
+import locationIcon from '@iconify-icons/bytesize/location';
 // const USERS_URL = 'http://localhost:3000/users/'
 const USERS_URL = 'https://filmboard-backend.herokuapp.com/users/'
 
@@ -43,7 +43,7 @@ const SideContainer = ({ id, name, userProfile, setCurrentUser, search, setSearc
                         <Avatar src={avatar} />
                         <Text fontSize="lg">{name}</Text>
                         <HStack>
-                            {/* <Icon icon={locationIcon} mt="4" /> */}
+                            <Icon icon={locationIcon} mt="4" />
                             <Text>{location}</Text>
                         </HStack>
                         <Text fontSize="md">{bio ? bio : "404 Bio Not Found"}</Text>

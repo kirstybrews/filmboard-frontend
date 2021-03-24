@@ -10,7 +10,7 @@ import {
     HStack
 } from "@chakra-ui/react";
 import { Icon } from '@iconify/react';
-// import locationIcon from '@iconify-icons/bytesize/location';
+import locationIcon from '@iconify-icons/bytesize/location';
 
 
 const ApplicationAccordionItem = ({ user, message }) => {
@@ -29,7 +29,7 @@ const ApplicationAccordionItem = ({ user, message }) => {
             </h2>
             <AccordionPanel pb={4}>
                 <HStack>
-                    {/* <Icon icon={locationIcon} mt="4" /> */}
+                    <Icon icon={locationIcon} mt="4" />
                     <Text>{user.location}</Text>
                 </HStack>
                 <HStack mt="3">

@@ -4,9 +4,9 @@ import { TimeIcon } from '@chakra-ui/icons';
 import ApplicationModal from './ApplicationModal';
 import ApplicationAccordion from './ApplicationAccordion';
 import EditJobFormDrawer from './EditJobFormDrawer';
-// import { Icon } from '@iconify/react';
-// import calendarEvent from '@iconify-icons/bi/calendar-event';
-// import locationIcon from '@iconify-icons/bytesize/location';
+import { Icon } from '@iconify/react';
+import calendarEvent from '@iconify-icons/bi/calendar-event';
+import locationIcon from '@iconify-icons/bytesize/location';
 
 
 const JobPosting = ({  apps, id, currentUser, userProfile, user_id, setApps, role, location, start_date, length_of_time, project_title, project_type, project_description, compensation, need_gear, applications, setJobPostings, jobPostings, setCurrentUser, status }) => {
@@ -31,11 +31,11 @@ const JobPosting = ({  apps, id, currentUser, userProfile, user_id, setApps, rol
             <Text fontSize="lg">{role}</Text>
             <HStack mt="1" spacing="24px">
                 <HStack>
-                    {/* <Icon icon={locationIcon} mt="4"/> */}
+                    <Icon icon={locationIcon} mt="4"/>
                     <Text>{location}</Text> 
                 </HStack>
                 <HStack>
-                    {/* <Icon icon={calendarEvent} /> */}
+                    <Icon icon={calendarEvent} />
                     <Text> Starts {start_date}</Text>
                 </HStack>
                 <HStack>
